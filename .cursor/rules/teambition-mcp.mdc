@@ -1,0 +1,118 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Teambition MCP 服务器开发指南
+
+## 项目概述
+
+Teambition MCP 是基于 Model Context Protocol (MCP) 协议开发的服务端，为 Teambition 应用提供 AI 能力支持。该服务允许 Teambition 应用通过统一协议调用各种 AI 工具。
+
+## 项目结构
+
+```
+teambition-mcp/
+├── src/             # 源代码
+│   ├── apis/        # API 实现
+│   ├── constants/   # 常量定义
+│   ├── mcp-server/  # MCP 服务器实现
+│   │   └── tools/   # MCP 工具集
+│   ├── types/       # TypeScript 类型定义
+│   └── __tests__/   # 测试文件
+```
+
+## 核心文件
+
+- [index.ts](mdc:src/index.ts) - 项目入口文件，启动 MCP 服务器
+- [server.ts](mdc:src/mcp-server/server.ts) - MCP 服务器实现
+- [register.ts](mdc:src/mcp-server/tools/register.ts) - 工具注册器，负责注册所有 MCP 工具
+
+## 技术栈
+
+- **语言**: TypeScript
+- **运行时**: Node.js
+- **核心库**:
+  - `fastmcp` - MCP 协议实现库
+  - `dotenv` - 环境变量管理
+  - `zod` - 数据验证
+  - `tws-auth` - 认证库
+- **测试工具**: Vitest
+
+## 开发流程
+
+1. **启动开发服务器**:
+   ```bash
+   pnpm dev
+   ```
+
+2. **检查 MCP 工具配置**:
+   ```bash
+   pnpm mcp:inspector
+   ```
+
+3. **运行测试**:
+   ```bash
+   pnpm test
+   ```
+
+## MCP 工具开发规范
+
+### 工具结构
+
+- 每个工具应放在对应的功能目录中（如用户相关工具放在 `tools/user/` 下）
+- 工具文件命名应反映其功能（如 `get-uid.ts`）
+- 为每个工具提供清晰的类型定义和文档注释
+
+### 工具注册
+
+1. 在相应的功能目录中实现工具
+2. 创建并导出注册函数（如 `registerGetUidTool`）
+3. 在 [register.ts](mdc:src/mcp-server/tools/register.ts) 中导入并调用注册函数
+
+### 示例工具注册格式
+
+```typescript
+export function registerXxxTool(tbMCPServer: TbMCPServer) {
+  const { server } = tbMCPServer
+  
+  server.defineDirectFunction({
+    name: 'xxx_tool_name',
+    description: '工具描述',
+    parameters: z.object({
+      // 参数定义
+    }),
+    handler: async (params) => {
+      // 实现逻辑
+      return result
+    },
+  })
+}
+```
+
+## 已实现功能
+
+### 用户相关功能
+- `get-uid` - 根据邮箱获取用户uid
+- `get-user-info-by-uid` - 根据用户uid获取用户信息
+- `get-user-info-by-email` - 根据邮箱获取用户信息
+
+### 组织相关功能
+- `get-org-info` - 获取组织信息
+- `update-org-info` - 更新组织信息
+
+## 开发新工具的步骤
+
+1. **确定工具类别**：确定新工具属于哪个功能类别（用户、组织、项目等）
+2. **创建工具文件**：在对应目录创建工具实现文件
+3. **实现注册函数**：按照标准格式实现工具注册函数
+4. **注册工具**：在 [register.ts](mdc:src/mcp-server/tools/register.ts) 中注册新工具
+5. **编写测试**：在 `__tests__` 目录中为新工具添加单元测试
+6. **更新文档**：在 README.md 中更新已实现功能列表
+
+## 测试规范
+
+- 使用 Vitest 进行单元测试
+- 为每个工具创建专门的测试文件
+- 测试文件应放在与源文件相对应的 `__tests__` 目录结构中
+- 针对工具的输入/输出进行全面测试，包括边界情况和错误处理

@@ -1,0 +1,226 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# MCP 工具开发规范
+
+## 工具目录结构
+
+MCP 工具根据功能分类组织，放置在以下目录结构中：
+
+```
+src/mcp-server/tools/
+├── user/           # 用户相关工具
+├── org/            # 组织相关工具
+├── register.ts     # 工具注册中心
+└── promise-exec.ts # 辅助工具
+```
+
+## 工具开发基本结构
+
+每个工具应遵循以下基本结构：
+
+```typescript
+// 1. 导入必要的依赖
+import { z } from 'zod'
+import type { TbMCPServer } from '../../server'
+
+// 2. 定义参数和返回值的类型
+const ParamsSchema = z.object({
+  // 参数定义
+})
+
+// 3. 实现注册函数
+export function registerXxxTool(tbMCPServer: TbMCPServer) {
+  const { server } = tbMCPServer
+  
+  server.defineDirectFunction({
+    // 4. 工具名称 - 使用下划线命名法
+    name: 'xxx_tool_name',
+    
+    // 5. 提供详细描述
+    description: '详细描述工具功能、使用场景和参数含义',
+    
+    // 6. 定义参数
+    parameters: ParamsSchema,
+    
+    // 7. 实现处理逻辑
+    handler: async (params) => {
+      try {
+        // 8. 业务逻辑实现
+        
+        // 9. 返回结果
+        return {
+          success: true,
+          data: {
+            // 结果数据
+          },
+        }
+      }
+      catch (error) {
+        // 10. 错误处理
+        return {
+          success: false,
+          error: error instanceof Error ? error.message : '未知错误',
+        }
+      }
+    },
+  })
+}
+```
+
+## 命名规范
+
+- **工具文件名**：使用短横线命名法，例如 `get-uid.ts`
+- **注册函数名**：使用 `registerXxxTool` 格式，其中 `Xxx` 为工具功能的驼峰命名
+- **工具名称**：使用下划线命名法，按功能域划分，例如 `user_get_info`
+
+## 错误处理
+
+所有工具都应实现统一的错误处理模式：
+
+```typescript
+try {
+  // 业务逻辑
+}
+catch (error) {
+  return {
+    success: false,
+    error: error instanceof Error ? error.message : '未知错误',
+  }
+}
+```
+
+## 参数验证
+
+使用 Zod 进行严格的参数验证：
+
+```typescript
+const ParamsSchema = z.object({
+  email: z.string().email('无效的邮箱格式'),
+  optional: z.string().optional(),
+})
+```
+
+## 异步操作
+
+使用 `promise-exec.ts` 中的工具处理异步操作：
+
+```typescript
+import { promiseExec } from '../promise-exec'
+
+// 在handler中
+const result = await promiseExec(async () => {
+  // 异步操作
+  return data
+})
+
+if (!result.success)
+  return { success: false, error: result.error }
+
+return { success: true, data: result.data }
+```
+
+## 工具注册
+
+所有工具必须在 `register.ts` 中注册：
+
+1. 导入注册函数
+2. 在 `registerAllTools` 函数中调用
+
+```typescript
+// 1. 导入
+import { registerXxxTool } from './xxx'
+
+export function registerAllTools(tbMCPServer: TbMCPServer) {
+  // 2. 调用注册
+  registerXxxTool(tbMCPServer)
+}
+```
+
+## 测试规范
+
+为每个工具创建对应的测试文件：
+
+```typescript
+// __tests__/mcp-server/tools/xxx/get-xxx.test.ts
+import { describe, it, expect, vi } from 'vitest'
+import { TbMCPServer } from '../../../../mcp-server/server'
+import { registerXxxTool } from '../../../../mcp-server/tools/xxx/get-xxx'
+
+describe('xxx_get_xxx tool', () => {
+  it('should successfully get xxx', async () => {
+    // 1. 准备测试环境
+    const mockServer = {
+      defineDirectFunction: vi.fn(),
+    }
+    const tbMCPServer = { server: mockServer } as unknown as TbMCPServer
+    
+    // 2. 注册工具
+    registerXxxTool(tbMCPServer)
+    
+    // 3. 提取处理函数
+    const handler = mockServer.defineDirectFunction.mock.calls[0][0].handler
+    
+    // 4. 执行测试
+    const result = await handler({ /* 测试参数 */ })
+    
+    // 5. 验证结果
+    expect(result.success).toBe(true)
+    expect(result.data).toEqual(/* 预期数据 */)
+  })
+  
+  it('should handle errors', async () => {
+    // 错误情况测试
+  })
+})
+```
+
+## 最佳实践
+
+### 1. 单一责任原则
+
+每个工具只负责一个明确的功能，避免过度耦合。
+
+### 2. 充分的文档
+
+为每个工具提供详细的 JSDoc 注释：
+
+```typescript
+/**
+ * 根据邮箱获取用户UID
+ * 
+ * @param {string} email - 用户邮箱
+ * @returns {string} 用户UID
+ * 
+ * @example
+ * const uid = await getUserUid('user@example.com')
+ */
+```
+
+### 3. 适当的日志
+
+添加必要的日志记录，但避免过度日志：
+
+```typescript
+console.log(`Processing request for: ${params.email}`)
+```
+
+### 4. 明确的返回值
+
+所有工具应返回统一格式的结果：
+
+```typescript
+// 成功情况
+{
+  success: true,
+  data: { /* 结果数据 */ }
+}
+
+// 失败情况
+{
+  success: false,
+  error: '错误信息'
+}
+```

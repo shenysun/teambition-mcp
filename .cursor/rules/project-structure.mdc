@@ -1,0 +1,240 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Teambition MCP 项目结构规范
+
+## 目录结构
+
+项目采用以下目录结构组织代码：
+
+```
+teambition-mcp/
+├── src/                    # 源代码目录
+│   ├── apis/               # API 实现
+│   ├── constants/          # 常量定义
+│   ├── mcp-server/         # MCP 服务器实现
+│   │   ├── server.ts       # 服务器核心实现
+│   │   └── tools/          # MCP 工具集
+│   │       ├── user/       # 用户相关工具
+│   │       ├── org/        # 组织相关工具
+│   │       ├── promise-exec.ts # 异步工具
+│   │       └── register.ts # 工具注册
+│   ├── types/              # 类型定义
+│   ├── __tests__/          # 测试文件
+│   └── index.ts            # 入口文件
+├── dist/                   # 编译输出目录
+├── .taskmaster/            # Taskmaster 配置
+├── .vscode/                # VS Code 配置
+└── [其他配置文件]
+```
+
+## 文件命名规范
+
+### 一般规则
+
+- 使用小写字母
+- 单词之间使用短横线（kebab-case）
+- 文件名应清晰表达文件内容和功能
+
+### 特定文件类型命名
+
+- **MCP工具**: `动词-名词.ts`，例如 `get-uid.ts`、`update-org-info.ts`
+- **类型定义**: `名词.types.ts`，例如 `user.types.ts`
+- **常量**: `名词.constants.ts`，例如 `api.constants.ts`
+- **测试文件**: `原文件名.test.ts`，例如 `get-uid.test.ts`
+
+## 模块结构
+
+### MCP 工具模块
+
+MCP 工具模块应按功能域组织，每个工具一个文件：
+
+```
+tools/
+├── user/              # 用户域
+│   ├── get-uid.ts     # 获取用户ID工具
+│   └── get-user-info.ts # 获取用户信息工具
+└── org/               # 组织域
+    └── get-org-info.ts # 获取组织信息工具
+```
+
+### 类型定义
+
+类型定义应按照功能域组织，集中在 `types` 目录：
+
+```
+types/
+├── user.types.ts      # 用户相关类型
+├── org.types.ts       # 组织相关类型
+└── common.types.ts    # 通用类型
+```
+
+### 测试目录
+
+测试目录应与源代码目录结构一致：
+
+```
+__tests__/
+├── mcp-server/
+│   └── tools/
+│       ├── user/
+│       │   └── get-uid.test.ts
+│       └── org/
+│           └── get-org-info.test.ts
+└── apis/
+    └── some-api.test.ts
+```
+
+## 导入规范
+
+### 导入顺序
+
+1. 外部依赖
+2. 项目内绝对导入 (从项目根目录开始)
+3. 相对导入
+
+```typescript
+// 1. 外部依赖
+import { z } from 'zod'
+import { FastMCP } from 'fastmcp'
+
+// 2. 项目内绝对导入 (可选)
+import { UserType } from 'src/types/user.types'
+
+// 3. 相对导入
+import { promiseExec } from '../promise-exec'
+import type { TbMCPServer } from '../../server'
+```
+
+### 导入格式
+
+- 类型导入使用 `import type`
+- 避免使用默认导出，推荐具名导出
+- 避免使用通配符导入 (`import * as`)
+
+```typescript
+// ✅ 推荐
+import type { UserType } from '../types/user.types'
+import { getUserInfo } from '../services/user-service'
+
+// ❌ 避免
+import UserType from '../types/user.types'
+import * as UserService from '../services/user-service'
+```
+
+## 文件内部结构
+
+### TypeScript 文件
+
+遵循以下顺序组织文件内容：
+
+1. 导入语句
+2. 类型/接口定义
+3. 常量定义
+4. 辅助函数
+5. 主要功能实现
+6. 导出语句
+
+```typescript
+// 1. 导入
+import { z } from 'zod'
+import type { TbMCPServer } from '../../server'
+
+// 2. 类型/接口定义
+interface UserData {
+  uid: string
+  name: string
+}
+
+// 3. 常量定义
+const USER_API_PATH = '/api/users'
+const ParamsSchema = z.object({
+  email: z.string().email(),
+})
+
+// 4. 辅助函数
+function formatUserData(data: any): UserData {
+  return {
+    uid: data.id,
+    name: data.displayName,
+  }
+}
+
+// 5. 主要功能实现
+export function registerGetUserTool(tbMCPServer: TbMCPServer) {
+  // 实现...
+}
+```
+
+## 配置文件
+
+配置文件应放在项目根目录：
+
+- `package.json` - 项目依赖和脚本
+- `.env` - 环境变量（不提交到版本控制）
+- `.env.example` - 环境变量示例（提交到版本控制）
+- `tsconfig.json` - TypeScript 配置
+- `.eslintrc.js` - ESLint 配置
+
+## 资源文件
+
+静态资源文件应放在 `assets` 目录（如果需要）：
+
+```
+assets/
+├── images/
+├── templates/
+└── data/
+```
+
+## 文档
+
+项目文档应放在 `docs` 目录（如果需要）：
+
+```
+docs/
+├── api/
+├── guides/
+└── README.md
+```
+
+## 分支策略
+
+- `main` - 主分支，稳定版本
+- `develop` - 开发分支
+- `feature/xxx` - 功能分支
+- `fix/xxx` - 修复分支
+
+## 提交规范
+
+使用规范化的提交消息：
+
+```
+<类型>(<范围>): <描述>
+
+<详细说明>
+
+<关闭的问题>
+```
+
+类型包括：
+- `feat`: 新功能
+- `fix`: 修复
+- `docs`: 文档更新
+- `style`: 代码格式（不影响功能）
+- `refactor`: 代码重构
+- `perf`: 性能优化
+- `test`: 添加测试
+- `chore`: 构建过程或辅助工具变动
+
+示例：
+
+```
+feat(user): 添加用户信息查询工具
+
+实现了通过邮箱查询用户信息的MCP工具
+
+Closes #123
+```
