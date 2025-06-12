@@ -1,0 +1,117 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+# Teambition MCP 通用类型定义
+
+## 类型目录结构
+
+项目的类型定义集中在 `src/types/` 目录下，按照功能域组织：
+
+```
+src/types/
+├── common.ts        # 通用基础类型
+├── response.ts      # API响应相关类型
+└── [domain].ts      # 特定领域类型，如 user.ts, org.ts
+```
+
+## 核心类型
+
+### 通用数据类型 (common.ts)
+
+[common.ts](mdc:src/types/common.ts) 定义了项目中广泛使用的基础类型：
+
+```typescript
+// 通用数据对象类型
+export type Data = Record<string, unknown>
+```
+
+这个类型用于表示任意键值对对象，常用于：
+- API请求/响应的数据载荷
+- 配置对象
+- 中间状态数据
+
+### API响应类型 (response.ts)
+
+[response.ts](mdc:src/types/response.ts) 定义了与Teambition API响应相关的类型和工具：
+
+```typescript
+import { z } from 'zod'
+
+// 生成Teambition API响应的Zod验证模式
+export function TBResponseSchema<T>(schema: z.ZodSchema<T>) {
+  return z.object({
+    code: z.number().describe('状态码'),
+    errorMessage: z.string().describe('错误信息'),
+    requestId: z.string().describe('请求ID'),
+    result: schema.describe('数据'),
+  })
+}
+
+// Teambition API响应类型
+export type TBResponse<T> = z.infer<ReturnType<typeof TBResponseSchema<T>>>
+```
+
+这些类型用于：
+- 验证和解析来自Teambition API的响应
+- 提供类型安全的API结果处理
+- 统一错误处理机制
+
+## 类型使用示例
+
+### 在MCP工具中使用响应类型
+
+```typescript
+import { z } from 'zod'
+import { TBResponseSchema } from '../../types/response'
+import type { Data } from '../../types/common'
+
+// 用户数据模式
+const UserSchema = z.object({
+  uid: z.string(),
+  name: z.string(),
+  email: z.string().email(),
+})
+
+// API响应模式
+const UserResponseSchema = TBResponseSchema(UserSchema)
+
+// 处理API响应
+function handleUserResponse(response: Data): TBResponse<typeof UserSchema> {
+  // 验证响应格式
+  const validatedResponse = UserResponseSchema.parse(response)
+  
+  // 现在可以安全地访问强类型的数据
+  return validatedResponse
+}
+```
+
+## 类型定义规范
+
+### 命名约定
+
+- 使用 PascalCase 命名类型和接口: `UserInfo`, `OrgData`
+- 使用 camelCase 命名类型别名: `userId`, `orgConfig`
+- 对于泛型类型，使用描述性名称: `TBResponse<T>` 而非 `Response<T>`
+
+### 类型导出
+
+- 从专用的类型文件中导出类型，而非从实现文件
+- 对通用类型使用 `export type`
+- 对通用工具函数使用 `export function`
+
+### Zod 验证模式
+
+项目使用 Zod 库进行运行时类型验证：
+
+- 为API响应创建明确的验证模式
+- 使用 `.describe()` 为字段添加文档
+- 使用 `z.infer<>` 从验证模式中提取TypeScript类型
+
+### 最佳实践
+
+- 尽量使用明确的类型而非 `any`
+- 为类型添加JSDoc注释说明用途
+- 保持类型定义简洁，避免过度设计
+- 为复杂类型创建更小的组合类型

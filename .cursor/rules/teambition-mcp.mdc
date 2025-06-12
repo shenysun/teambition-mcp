@@ -18,7 +18,7 @@ teambition-mcp/
 │   ├── constants/   # 常量定义
 │   ├── mcp-server/  # MCP 服务器实现
 │   │   └── tools/   # MCP 工具集
-│   ├── types/       # TypeScript 类型定义
+│   ├── types/       # 类型定义
 │   └── __tests__/   # 测试文件
 ```
 
@@ -27,6 +27,8 @@ teambition-mcp/
 - [index.ts](mdc:src/index.ts) - 项目入口文件，启动 MCP 服务器
 - [server.ts](mdc:src/mcp-server/server.ts) - MCP 服务器实现
 - [register.ts](mdc:src/mcp-server/tools/register.ts) - 工具注册器，负责注册所有 MCP 工具
+- [common.ts](mdc:src/types/common.ts) - 通用数据类型定义
+- [response.ts](mdc:src/types/response.ts) - API响应类型定义
 
 ## 技术栈
 
@@ -89,6 +91,16 @@ export function registerXxxTool(tbMCPServer: TbMCPServer) {
   })
 }
 ```
+
+## 类型系统
+
+项目使用 TypeScript 类型系统和 Zod 运行时验证确保类型安全：
+
+- 通用类型定义在 [src/types/](mdc:src/types) 目录下
+- 使用 [common.ts](mdc:src/types/common.ts) 中的基本类型 `Data` 表示通用数据对象
+- 使用 [response.ts](mdc:src/types/response.ts) 中的 `TBResponse<T>` 和 `TBResponseSchema<T>` 处理API响应
+
+更多关于类型系统的详细信息，请参考 [types.mdc](mdc:.cursor/rules/types.mdc)。
 
 ## 已实现功能
 
