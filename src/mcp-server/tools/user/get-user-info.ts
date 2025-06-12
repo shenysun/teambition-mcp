@@ -1,5 +1,5 @@
 import type { TbMCPServer } from '../../server'
-import { getUserInfo, GetUserInfoByEmailSchema, GetUserInfoByUidSchema, GetUserInfoSchema } from '../../../apis'
+import { getUserInfo, GetUserInfoByEmailSchema, GetUserInfoByUidSchema } from '../../../apis'
 import { promise2ExecContent } from '../promise-exec'
 
 // 注册通过用户ID获取用户信息的工具

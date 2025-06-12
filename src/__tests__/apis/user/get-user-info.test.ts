@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { tbServer } from '../../../apis/request'
-import { getUserInfo, type GetUserInfo, GetUserInfoSchema, type UserInfo, UserInfoSchema } from '../../../apis/user/get-user-info'
+import { getUserInfo, type GetUserInfo, GetUserInfoSchema, UserInfoSchema } from '../../../apis/user/get-user-info'
 
 // Mock tbServer
 vi.mock('../../../apis/request', () => ({

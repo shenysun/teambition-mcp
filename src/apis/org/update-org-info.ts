@@ -1,5 +1,5 @@
 import type { z } from 'zod'
-import type { OrgInfo, OrgInfoResponse } from './get-org-info'
+import type { OrgInfoResponse } from './get-org-info'
 import { getOrgId } from '../../constants'
 import { tbServer } from '../request'
 import { OrgInfoSchema } from './get-org-info'

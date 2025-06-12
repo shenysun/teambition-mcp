@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { type UpdateOrgInfo, UpdateOrgInfoSchema, updateOrgInfo } from '../../../apis/org/update-org-info'
+import { type UpdateOrgInfo, updateOrgInfo, UpdateOrgInfoSchema } from '../../../apis/org/update-org-info'
 import { tbServer } from '../../../apis/request'
 
 // Mock tbServer
