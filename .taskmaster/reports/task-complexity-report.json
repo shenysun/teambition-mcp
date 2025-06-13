@@ -1,0 +1,45 @@
+{
+  "meta": {
+    "generatedAt": "2025-06-12T11:01:23.863Z",
+    "tasksAnalyzed": 4,
+    "totalTasks": 4,
+    "analysisCount": 4,
+    "thresholdScore": 5,
+    "projectName": "teambition-mcp",
+    "usedResearch": false
+  },
+  "complexityAnalysis": [
+    {
+      "taskId": 1,
+      "taskTitle": "构建 MCP 服务器基础架构与环境配置",
+      "complexityScore": 7,
+      "recommendedSubtasks": 5,
+      "expansionPrompt": "将此基础架构任务分解为独立的配置和设置子任务，每个子任务专注于特定的技术栈组件（如 TypeScript 环境、MCP 服务器配置、认证集成、错误处理等），确保每个子任务可以独立完成并有明确的验收标准。",
+      "reasoning": "该任务涉及多个技术栈的初始化和配置，包括 Node.js/TypeScript 环境、MCP 服务器、认证系统等，具有中高复杂度。需要按技术组件分解，确保基础设施的稳定性。"
+    },
+    {
+      "taskId": 2,
+      "taskTitle": "实现用户模块 MCP 工具集",
+      "complexityScore": 6,
+      "recommendedSubtasks": 4,
+      "expansionPrompt": "将用户模块开发分解为数据模式定义、API 调用实现、MCP 工具开发和集成注册等子任务，每个子任务专注于特定的功能层面，确保用户信息查询功能的完整性和可靠性。",
+      "reasoning": "该任务功能相对集中，主要围绕用户信息的查询和处理，复杂度中等。按功能层次分解可以确保每个组件的质量和可测试性。"
+    },
+    {
+      "taskId": 3,
+      "taskTitle": "实现任务模块 MCP 工具集",
+      "complexityScore": 7,
+      "recommendedSubtasks": 5,
+      "expansionPrompt": "将任务模块开发分解为任务数据建模、CRUD 操作实现、评论功能、工具注册和错误处理等子任务，重点关注任务生命周期管理的完整性和业务逻辑的正确性。",
+      "reasoning": "任务模块比用户模块更复杂，涉及完整的 CRUD 操作和任务生命周期管理，业务逻辑较为复杂。需要按操作类型和功能模块进行分解。"
+    },
+    {
+      "taskId": 4,
+      "taskTitle": "系统集成测试与生产部署准备",
+      "complexityScore": 8,
+      "recommendedSubtasks": 6,
+      "expansionPrompt": "将集成部署任务分解为模块集成、系统测试、性能优化、生产配置、监控设置和文档编写等子任务，每个子任务关注系统上线前的特定准备工作，确保生产环境的稳定性和可维护性。",
+      "reasoning": "该任务涉及系统集成、测试、部署和生产运维等多个方面，复杂度较高。需要按照系统上线的不同阶段进行分解，确保每个环节的质量。"
+    }
+  ]
+}

@@ -1,0 +1,191 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "构建 MCP 服务器基础架构与环境配置",
+      "description": "建立基于 FastMCP 的服务器基础架构，配置 TypeScript 开发环境，设置数据验证模式和 API 客户端基础设施",
+      "details": "1. 初始化 Node.js 项目并配置 TypeScript 环境\n2. 安装核心依赖：FastMCP、Zod、tws-auth、dotenv\n3. 创建 MCP 服务器实例并配置基本设置\n4. 实现 TbMCPServer 类封装 FastMCP 服务器\n5. 配置环境变量管理（API 密钥、服务端点等）\n6. 创建通用的 API 客户端基础类，集成 tws-auth 认证\n7. 实现 promise2ExecContent 工具函数，用于将 API 响应转换为 MCP ContentResult 格式\n8. 配置 ESLint 代码规范和项目结构\n9. 创建基础的错误处理和日志记录机制",
+      "testStrategy": "1. 单元测试：验证 MCP 服务器初始化和配置正确性\n2. 集成测试：测试与 tws-auth 的认证集成\n3. 环境测试：验证不同环境配置的正确加载\n4. 错误处理测试：验证异常情况下的服务器稳定性",
+      "priority": "high",
+      "dependencies": [],
+      "status": "pending",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "TypeScript 开发环境配置",
+          "description": "初始化 Node.js/TypeScript 开发环境，配置项目结构、编译设置和开发工具链",
+          "dependencies": [],
+          "details": "包括 package.json 初始化、TypeScript 配置文件设置、ESLint/Prettier 代码规范配置、构建脚本设置。验收标准：TypeScript 代码能够正常编译，代码规范检查通过，开发环境启动正常。",
+          "status": "done"
+        },
+        {
+          "id": 2,
+          "title": "MCP 服务器核心配置",
+          "description": "配置 MCP (Model Context Protocol) 服务器的基础架构和连接设置",
+          "dependencies": [
+            1
+          ],
+          "details": "包括 MCP 服务器初始化、协议配置、连接管理器设置、消息处理机制配置。验收标准：MCP 服务器能够成功启动，协议通信正常，连接状态可监控。",
+          "status": "done"
+        },
+        {
+          "id": 3,
+          "title": "认证与授权系统集成",
+          "description": "实现用户认证机制和权限控制系统的集成配置",
+          "dependencies": [
+            1,
+            2
+          ],
+          "details": "包括认证中间件配置、JWT 令牌管理、用户权限验证、安全策略设置。验收标准：用户可以正常登录认证，权限控制有效，安全机制运行正常。",
+          "status": "done"
+        },
+        {
+          "id": 4,
+          "title": "错误处理和日志系统配置",
+          "description": "建立完整的错误处理机制和日志记录系统",
+          "dependencies": [
+            1,
+            2
+          ],
+          "details": "包括全局错误处理器配置、日志级别设置、错误监控集成、异常追踪机制。验收标准：异常能够被正确捕获和处理，日志信息完整可查询，错误监控正常工作。",
+          "status": "pending"
+        },
+        {
+          "id": 5,
+          "title": "系统集成测试和性能优化",
+          "description": "进行整体系统集成测试，优化配置和性能参数",
+          "dependencies": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "details": "包括端到端测试配置、性能基准测试、系统监控设置、配置优化调整。验收标准：所有组件集成测试通过，系统性能达到预期指标，监控告警机制正常运行。",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "实现用户模块 MCP 工具集",
+      "description": "开发用户相关的 MCP 工具，包括根据邮箱获取用户 ID、根据用户 ID 获取用户信息等功能，实现完整的用户信息查询服务",
+      "details": "1. 定义用户相关的 Zod 数据模式：\n   - GetUserIdByEmailSchema（邮箱查询用户 ID 参数）\n   - GetUserInfoByUidSchema（用户 ID 查询信息参数）\n   - UserIdSchema（用户 ID 响应格式）\n   - UserInfoSchema（用户信息响应格式）\n2. 实现用户 API 调用函数：\n   - getUserIdByEmail()：调用 user/getid 接口\n   - getUserInfo()：调用 user/info 或 user/query 接口\n3. 开发 MCP 工具：\n   - get-uid：根据邮箱获取用户 ID\n   - get-user-info-by-uid：根据用户 ID 获取用户信息\n   - get-user-info-by-email：根据邮箱获取用户信息\n4. 实现 registerUserTools() 函数，统一注册所有用户工具\n5. 添加参数验证、错误处理和超时控制（10秒）\n6. 实现接口选择逻辑，根据参数类型选择合适的 API 端点",
+      "testStrategy": "1. 单元测试：测试每个 Zod 模式的验证逻辑\n2. API 测试：模拟 Teambition 后端响应，测试 API 调用函数\n3. 工具测试：验证每个 MCP 工具的输入输出正确性\n4. 集成测试：测试工具注册和执行的完整流程\n5. 边界测试：测试无效邮箱、不存在用户等异常情况",
+      "priority": "high",
+      "dependencies": [
+        1
+      ],
+      "status": "pending",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "用户数据模式定义",
+          "description": "定义用户信息的数据结构和模式，包括用户实体、字段类型、验证规则等",
+          "dependencies": [],
+          "details": "创建用户数据模型，定义用户ID、用户名、邮箱、创建时间等核心字段，设置数据验证规则和约束条件，确保数据一致性和完整性",
+          "status": "pending"
+        },
+        {
+          "id": 2,
+          "title": "用户API调用实现",
+          "description": "实现用户信息查询的API接口，包括单个用户查询、批量查询和条件筛选功能",
+          "dependencies": [
+            1
+          ],
+          "details": "基于定义的数据模式实现RESTful API接口，包括GET /users/:id、GET /users等接口，实现错误处理、参数验证和响应格式化",
+          "status": "pending"
+        },
+        {
+          "id": 3,
+          "title": "MCP工具开发",
+          "description": "开发基于MCP协议的用户查询工具，实现与外部系统的标准化交互",
+          "dependencies": [
+            2
+          ],
+          "details": "创建MCP工具类，实现用户查询的标准化接口，包括工具注册、参数解析、结果转换等功能，确保与MCP协议的兼容性",
+          "status": "pending"
+        },
+        {
+          "id": 4,
+          "title": "用户模块集成注册",
+          "description": "将开发完成的用户模块注册到系统中，完成模块集成和功能测试",
+          "dependencies": [
+            3
+          ],
+          "details": "在系统中注册用户模块和MCP工具，配置路由和中间件，进行端到端测试，验证用户信息查询功能的完整性和可靠性",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "title": "实现任务模块 MCP 工具集",
+      "description": "开发任务管理相关的 MCP 工具，包括任务查询、创建、更新、删除和评论功能，提供完整的任务生命周期管理能力",
+      "details": "1. 定义任务相关的 Zod 数据模式：\n   - TaskSchema（任务对象结构）\n   - QueryTaskSchema（任务查询参数）\n   - CreateTaskSchema（任务创建参数）\n   - UpdateTaskSchema（任务更新参数）\n   - DeleteTaskSchema（任务删除参数）\n2. 实现任务 API 调用函数：\n   - queryTask()：查询任务详情\n   - createTask()：创建新任务\n   - updateTask()：更新任务属性\n   - deleteTask()：删除任务\n   - commentTask()：添加任务评论\n3. 开发 MCP 工具：\n   - task-query：支持通过任务 ID 或短 ID 查询任务\n   - task-create：创建任务，支持设置执行者、参与者、优先级等\n   - task-update：更新任务属性，支持差异更新\n   - task-delete：删除任务\n   - task-comment：添加任务评论\n4. 实现 registerTaskTools() 函数，统一注册所有任务工具\n5. 优化查询参数处理，移除空值和转换特殊条件\n6. 添加超时控制（10秒）和完善的错误处理机制",
+      "testStrategy": "1. 单元测试：验证所有 Zod 模式的参数验证\n2. API 测试：模拟任务相关接口的各种响应场景\n3. 工具测试：测试每个任务工具的功能完整性\n4. 业务测试：验证任务创建到删除的完整流程\n5. 并发测试：测试任务更新的并发处理能力\n6. 性能测试：确保任务操作响应时间在 300ms 以内",
+      "priority": "high",
+      "dependencies": [
+        1
+      ],
+      "status": "pending",
+      "subtasks": [
+        {
+          "id": 1,
+          "title": "任务数据模式定义",
+          "description": "定义任务信息的数据结构和模式，包括任务实体、字段类型、验证规则等",
+          "details": "创建任务数据模型，定义任务ID、标题、描述、状态、优先级、截止日期等核心字段，设置数据验证规则和约束条件，确保数据一致性和完整性",
+          "status": "pending",
+          "dependencies": [],
+          "parentTaskId": 3
+        },
+        {
+          "id": 2,
+          "title": "任务API调用实现",
+          "description": "实现任务信息查询的API接口，包括单个任务查询、批量查询和条件筛选功能",
+          "details": "基于定义的数据模式实现RESTful API接口，包括GET /tasks/:id、GET /tasks等接口，实现错误处理、参数验证和响应格式化",
+          "status": "pending",
+          "dependencies": [
+            1
+          ],
+          "parentTaskId": 3
+        },
+        {
+          "id": 3,
+          "title": "MCP工具开发",
+          "description": "开发基于MCP协议的任务查询工具，实现与外部系统的标准化交互",
+          "details": "创建MCP工具类，实现任务查询的标准化接口，包括工具注册、参数解析、结果转换等功能，确保与MCP协议的兼容性",
+          "status": "pending",
+          "dependencies": [
+            2
+          ],
+          "parentTaskId": 3
+        },
+        {
+          "id": 4,
+          "title": "任务模块集成注册",
+          "description": "将开发完成的任务模块注册到系统中，完成模块集成和功能测试",
+          "details": "在系统中注册任务模块和MCP工具，配置路由和中间件，进行端到端测试，验证任务信息查询功能的完整性和可靠性",
+          "status": "pending",
+          "dependencies": [
+            3
+          ],
+          "parentTaskId": 3
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "title": "系统集成测试与生产部署准备",
+      "description": "完成用户和任务模块的集成，进行全面的系统测试，配置生产环境部署和监控机制",
+      "details": "1. 集成用户和任务模块到主 MCP 服务器：\n   - 在主服务器初始化时调用 registerUserTools() 和 registerTaskTools()\n   - 验证所有工具的正确注册和可用性\n2. 实施完整的集成测试：\n   - 测试用户信息查询到任务操作的完整业务流程\n   - 验证不同工具之间的数据传递和依赖关系\n   - 测试错误场景下的系统恢复能力\n3. 性能优化和监控：\n   - 实施 API 响应缓存机制（针对用户信息查询）\n   - 添加请求计数和响应时间监控\n   - 配置服务健康检查端点\n4. 生产环境配置：\n   - 配置生产环境的环境变量和安全设置\n   - 设置 API 限流和防滥用机制\n   - 配置日志收集和错误报告\n5. 文档完善：\n   - 更新 API 文档和使用示例\n   - 创建部署和运维指南\n   - 编写故障排查手册",
+      "testStrategy": "1. 端到端测试：模拟真实客户端的完整使用场景\n2. 负载测试：验证系统在高并发下的性能表现\n3. 安全测试：验证 API 安全性和权限控制\n4. 兼容性测试：确保与不同 MCP 客户端的兼容性\n5. 监控测试：验证监控告警和日志记录的准确性\n6. 灾难恢复测试：验证服务异常后的恢复能力",
+      "priority": "medium",
+      "dependencies": [
+        2,
+        3
+      ],
+      "status": "pending",
+      "subtasks": []
+    }
+  ]
+}

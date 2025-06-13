@@ -1,0 +1,62 @@
+# Task ID: 3
+# Title: 实现任务模块 MCP 工具集
+# Status: pending
+# Dependencies: 1
+# Priority: high
+# Description: 开发任务管理相关的 MCP 工具，包括任务查询、创建、更新、删除和评论功能，提供完整的任务生命周期管理能力
+# Details:
+1. 定义任务相关的 Zod 数据模式：
+   - TaskSchema（任务对象结构）
+   - QueryTaskSchema（任务查询参数）
+   - CreateTaskSchema（任务创建参数）
+   - UpdateTaskSchema（任务更新参数）
+   - DeleteTaskSchema（任务删除参数）
+2. 实现任务 API 调用函数：
+   - queryTask()：查询任务详情
+   - createTask()：创建新任务
+   - updateTask()：更新任务属性
+   - deleteTask()：删除任务
+   - commentTask()：添加任务评论
+3. 开发 MCP 工具：
+   - task-query：支持通过任务 ID 或短 ID 查询任务
+   - task-create：创建任务，支持设置执行者、参与者、优先级等
+   - task-update：更新任务属性，支持差异更新
+   - task-delete：删除任务
+   - task-comment：添加任务评论
+4. 实现 registerTaskTools() 函数，统一注册所有任务工具
+5. 优化查询参数处理，移除空值和转换特殊条件
+6. 添加超时控制（10秒）和完善的错误处理机制
+
+# Test Strategy:
+1. 单元测试：验证所有 Zod 模式的参数验证
+2. API 测试：模拟任务相关接口的各种响应场景
+3. 工具测试：测试每个任务工具的功能完整性
+4. 业务测试：验证任务创建到删除的完整流程
+5. 并发测试：测试任务更新的并发处理能力
+6. 性能测试：确保任务操作响应时间在 300ms 以内
+
+# Subtasks:
+## 1. 任务数据模式定义 [pending]
+### Dependencies: None
+### Description: 定义任务信息的数据结构和模式，包括任务实体、字段类型、验证规则等
+### Details:
+创建任务数据模型，定义任务ID、标题、描述、状态、优先级、截止日期等核心字段，设置数据验证规则和约束条件，确保数据一致性和完整性
+
+## 2. 任务API调用实现 [pending]
+### Dependencies: 3.1
+### Description: 实现任务信息查询的API接口，包括单个任务查询、批量查询和条件筛选功能
+### Details:
+基于定义的数据模式实现RESTful API接口，包括GET /tasks/:id、GET /tasks等接口，实现错误处理、参数验证和响应格式化
+
+## 3. MCP工具开发 [pending]
+### Dependencies: 3.2
+### Description: 开发基于MCP协议的任务查询工具，实现与外部系统的标准化交互
+### Details:
+创建MCP工具类，实现任务查询的标准化接口，包括工具注册、参数解析、结果转换等功能，确保与MCP协议的兼容性
+
+## 4. 任务模块集成注册 [pending]
+### Dependencies: 3.3
+### Description: 将开发完成的任务模块注册到系统中，完成模块集成和功能测试
+### Details:
+在系统中注册任务模块和MCP工具，配置路由和中间件，进行端到端测试，验证任务信息查询功能的完整性和可靠性
+

@@ -1,0 +1,55 @@
+# Task ID: 2
+# Title: 实现用户模块 MCP 工具集
+# Status: pending
+# Dependencies: 1
+# Priority: high
+# Description: 开发用户相关的 MCP 工具，包括根据邮箱获取用户 ID、根据用户 ID 获取用户信息等功能，实现完整的用户信息查询服务
+# Details:
+1. 定义用户相关的 Zod 数据模式：
+   - GetUserIdByEmailSchema（邮箱查询用户 ID 参数）
+   - GetUserInfoByUidSchema（用户 ID 查询信息参数）
+   - UserIdSchema（用户 ID 响应格式）
+   - UserInfoSchema（用户信息响应格式）
+2. 实现用户 API 调用函数：
+   - getUserIdByEmail()：调用 user/getid 接口
+   - getUserInfo()：调用 user/info 或 user/query 接口
+3. 开发 MCP 工具：
+   - get-uid：根据邮箱获取用户 ID
+   - get-user-info-by-uid：根据用户 ID 获取用户信息
+   - get-user-info-by-email：根据邮箱获取用户信息
+4. 实现 registerUserTools() 函数，统一注册所有用户工具
+5. 添加参数验证、错误处理和超时控制（10秒）
+6. 实现接口选择逻辑，根据参数类型选择合适的 API 端点
+
+# Test Strategy:
+1. 单元测试：测试每个 Zod 模式的验证逻辑
+2. API 测试：模拟 Teambition 后端响应，测试 API 调用函数
+3. 工具测试：验证每个 MCP 工具的输入输出正确性
+4. 集成测试：测试工具注册和执行的完整流程
+5. 边界测试：测试无效邮箱、不存在用户等异常情况
+
+# Subtasks:
+## 1. 用户数据模式定义 [pending]
+### Dependencies: None
+### Description: 定义用户信息的数据结构和模式，包括用户实体、字段类型、验证规则等
+### Details:
+创建用户数据模型，定义用户ID、用户名、邮箱、创建时间等核心字段，设置数据验证规则和约束条件，确保数据一致性和完整性
+
+## 2. 用户API调用实现 [pending]
+### Dependencies: 2.1
+### Description: 实现用户信息查询的API接口，包括单个用户查询、批量查询和条件筛选功能
+### Details:
+基于定义的数据模式实现RESTful API接口，包括GET /users/:id、GET /users等接口，实现错误处理、参数验证和响应格式化
+
+## 3. MCP工具开发 [pending]
+### Dependencies: 2.2
+### Description: 开发基于MCP协议的用户查询工具，实现与外部系统的标准化交互
+### Details:
+创建MCP工具类，实现用户查询的标准化接口，包括工具注册、参数解析、结果转换等功能，确保与MCP协议的兼容性
+
+## 4. 用户模块集成注册 [pending]
+### Dependencies: 2.3
+### Description: 将开发完成的用户模块注册到系统中，完成模块集成和功能测试
+### Details:
+在系统中注册用户模块和MCP工具，配置路由和中间件，进行端到端测试，验证用户信息查询功能的完整性和可靠性
+
