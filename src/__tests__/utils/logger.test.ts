@@ -12,6 +12,7 @@ describe('logger', () => {
 
   afterEach(() => {
     vi.restoreAllMocks()
+    delete process.env.LOG_LEVEL
   })
 
   it('should log error messages', () => {
@@ -30,6 +31,8 @@ describe('logger', () => {
   })
 
   it('should log debug messages', () => {
+    // 设置环境变量，启用DEBUG级别日志
+    process.env.LOG_LEVEL = 'DEBUG'
     logger.debug('Test debug message')
     expect(console.debug).toHaveBeenCalled()
   })

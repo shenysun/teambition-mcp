@@ -79,8 +79,7 @@ describe('get-org-info.ts', () => {
       }
       vi.mocked(tbServer.get).mockResolvedValue(mockResponse)
 
-      const orgId = 'custom-org-id'
-      await getOrgInfo(orgId)
+      await getOrgInfo({ orgId: 'custom-org-id' })
 
       expect(tbServer.withTenant).toHaveBeenCalledWith('custom-org-id', 'organization')
       expect(tbServer.get).toHaveBeenCalledWith('org/info')
@@ -102,7 +101,7 @@ describe('get-org-info.ts', () => {
       }
       vi.mocked(tbServer.get).mockResolvedValue(mockResponse)
 
-      await getOrgInfo() // 不传参数，使用默认值
+      await getOrgInfo({}) // 不传参数，使用默认值
 
       expect(tbServer.withTenant).toHaveBeenCalledWith('default-org-id', 'organization')
       expect(tbServer.get).toHaveBeenCalledWith('org/info')
@@ -124,7 +123,7 @@ describe('get-org-info.ts', () => {
       }
       vi.mocked(tbServer.get).mockResolvedValue(mockResponse)
 
-      const result = await getOrgInfo('org123')
+      const result = await getOrgInfo({ orgId: 'org123' })
 
       expect(result).toEqual(mockResponse)
     })
@@ -133,14 +132,14 @@ describe('get-org-info.ts', () => {
       const mockError = new Error('获取组织信息失败')
       vi.mocked(tbServer.get).mockRejectedValue(mockError)
 
-      await expect(getOrgInfo('org123')).rejects.toThrow('获取组织信息失败')
+      await expect(getOrgInfo({ orgId: 'org123' })).rejects.toThrow('获取组织信息失败')
     })
 
     it('应该正确设置租户信息', async () => {
       const mockResponse = { success: true, result: {} }
       vi.mocked(tbServer.get).mockResolvedValue(mockResponse)
 
-      await getOrgInfo('test-org-123')
+      await getOrgInfo({ orgId: 'test-org-123' })
 
       expect(tbServer.withTenant).toHaveBeenCalledTimes(1)
       expect(tbServer.withTenant).toHaveBeenCalledWith('test-org-123', 'organization')

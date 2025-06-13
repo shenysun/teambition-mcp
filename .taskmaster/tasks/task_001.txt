@@ -24,34 +24,25 @@
 # Subtasks:
 ## 1. TypeScript 开发环境配置 [done]
 ### Dependencies: None
-### Description: 初始化 Node.js/TypeScript 开发环境，配置项目结构、编译设置和开发工具链
+### Description: 初始化 Node.js/TypeScript 项目，安装核心依赖，配置 TypeScript 编译选项
 ### Details:
-包括 package.json 初始化、TypeScript 配置文件设置、ESLint/Prettier 代码规范配置、构建脚本设置。验收标准：TypeScript 代码能够正常编译，代码规范检查通过，开发环境启动正常。
 
-## 2. MCP 服务器核心配置 [done]
-### Dependencies: 1.1
-### Description: 配置 MCP (Model Context Protocol) 服务器的基础架构和连接设置
-### Details:
-包括 MCP 服务器初始化、协议配置、连接管理器设置、消息处理机制配置。验收标准：MCP 服务器能够成功启动，协议通信正常，连接状态可监控。
 
-## 3. 认证与授权系统集成 [done]
-### Dependencies: 1.1, 1.2
-### Description: 实现用户认证机制和权限控制系统的集成配置
+## 2. MCP 服务器实例创建 [done]
+### Dependencies: None
+### Description: 创建 MCP 服务器实例，配置基本设置，实现 TbMCPServer 类
 ### Details:
-包括认证中间件配置、JWT 令牌管理、用户权限验证、安全策略设置。验收标准：用户可以正常登录认证，权限控制有效，安全机制运行正常。
 
-## 4. 错误处理和日志系统配置 [done]
-### Dependencies: 1.1, 1.2
-### Description: 建立完整的错误处理机制和日志记录系统
-### Details:
-包括全局错误处理器配置、日志级别设置、错误监控集成、异常追踪机制。验收标准：异常能够被正确捕获和处理，日志信息完整可查询，错误监控正常工作。
-<info added on 2025-06-13T03:03:03.236Z>
-已完成实现：创建了完整的错误处理和日志系统架构，包括logger.ts模块（支持四级日志、环境变量配置、格式化输出）和error-handler.ts模块（定义TbError基础类及其子类、统一错误处理函数）。系统已集成到MCP服务器主程序，添加了启动关闭日志、全局异常处理、Promise拒绝处理。编写了配套单元测试验证各功能模块，并提供详细的README.md使用文档。整体架构简洁高效，完全满足验收标准要求。
-</info added on 2025-06-13T03:03:03.236Z>
 
-## 5. 系统集成测试和性能优化 [done]
-### Dependencies: 1.1, 1.2, 1.3, 1.4
-### Description: 进行整体系统集成测试，优化配置和性能参数
+## 3. API 客户端基础设施 [done]
+### Dependencies: None
+### Description: 创建通用的 API 客户端基础类，集成 tws-auth 认证，实现响应转换
 ### Details:
-包括端到端测试配置、性能基准测试、系统监控设置、配置优化调整。验收标准：所有组件集成测试通过，系统性能达到预期指标，监控告警机制正常运行。
+
+
+## 4. 错误处理和日志记录 [done]
+### Dependencies: None
+### Description: 创建基础的错误处理和日志记录机制，确保服务稳定性
+### Details:
+
 

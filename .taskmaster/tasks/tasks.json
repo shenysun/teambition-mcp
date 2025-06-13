@@ -46,31 +46,31 @@
       "dependencies": [
         1
       ],
-      "status": "pending",
+      "status": "done",
       "subtasks": [
         {
           "id": 1,
           "title": "用户数据模式定义",
           "description": "定义用户信息的数据结构和模式，包括用户ID、邮箱、姓名等字段",
-          "status": "pending"
+          "status": "done"
         },
         {
           "id": 2,
           "title": "用户API调用实现",
           "description": "实现用户信息查询的API接口，包括通过邮箱获取用户ID、通过ID获取用户信息等功能",
-          "status": "pending"
+          "status": "done"
         },
         {
           "id": 3,
           "title": "MCP工具开发",
           "description": "开发基于MCP协议的用户信息查询工具，实现与外部系统的标准化交互",
-          "status": "pending"
+          "status": "done"
         },
         {
           "id": 4,
           "title": "用户模块集成注册",
           "description": "将开发完成的用户模块注册到系统中，完成模块集成和功能测试",
-          "status": "pending"
+          "status": "done"
         }
       ]
     },

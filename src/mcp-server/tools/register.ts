@@ -4,9 +4,15 @@ import {
   registerUpdateOrgInfoTool,
 } from './org'
 import {
+  registerBatchQueryUsersTool,
+  registerCheckAppExistsTool,
+  registerGetThirdAccountInfoTool,
   registerGetUidTool,
+  registerGetUserByUniqueFieldTool,
   registerGetUserInfoByEmailTool,
   registerGetUserInfoByUidTool,
+  registerGetUserPreferencesTool,
+  registerQueryIdMapTool,
 } from './user'
 
 /**
@@ -18,6 +24,12 @@ export function registerAllTools(tbMCPServer: TbMCPServer) {
   registerGetUidTool(tbMCPServer)
   registerGetUserInfoByUidTool(tbMCPServer)
   registerGetUserInfoByEmailTool(tbMCPServer)
+  registerBatchQueryUsersTool(tbMCPServer)
+  registerCheckAppExistsTool(tbMCPServer)
+  registerGetThirdAccountInfoTool(tbMCPServer)
+  registerGetUserPreferencesTool(tbMCPServer)
+  registerGetUserByUniqueFieldTool(tbMCPServer)
+  registerQueryIdMapTool(tbMCPServer)
 
   // // 注册组织相关工具
   registerGetOrgInfoTool(tbMCPServer)

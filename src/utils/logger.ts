@@ -16,6 +16,11 @@ const DEFAULT_LOG_LEVEL = LogLevel.INFO
 
 // 从环境变量获取日志级别
 function getLogLevelFromEnv(): LogLevel {
+  // 在测试环境中默认使用 DEBUG 级别
+  if (process.env.NODE_ENV === 'test' || process.env.VITEST) {
+    return LogLevel.DEBUG
+  }
+
   const envLevel = process.env.LOG_LEVEL?.toUpperCase()
   if (!envLevel)
     return DEFAULT_LOG_LEVEL

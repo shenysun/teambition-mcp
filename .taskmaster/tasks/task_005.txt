@@ -1,0 +1,19 @@
+# Task ID: 5
+# Title: 实现项目模块 MCP 工具集
+# Status: pending
+# Dependencies: 1
+# Priority: medium
+# Description: 开发项目管理相关的 MCP 工具，包括项目信息查询、成员管理和配置控制功能
+# Details:
+1. 定义项目相关的 Zod 数据模式
+2. 实现项目 API 调用函数
+3. 开发 MCP 工具
+4. 实现 registerProjectTools() 函数，统一注册所有项目工具
+5. 添加参数验证、错误处理和超时控制
+
+# Test Strategy:
+1. 单元测试：验证所有 Zod 模式的参数验证
+2. API 测试：模拟项目 API 的各种响应场景
+3. 工具测试：测试每个项目工具的功能完整性
+4. 错误处理测试：验证无效项目 ID 等异常情况
+5. 性能测试：确保项目信息查询响应时间在 300ms 以内

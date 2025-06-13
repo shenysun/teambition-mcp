@@ -5,7 +5,7 @@ import { tbServer } from '../request'
 
 export const GetUserIdByEmailSchema = z.object({
   email: z.string().describe('查询用户邮箱'),
-  orgId: z.string().optional().describe('组织ID'),
+  orgId: z.string().describe('组织ID'),
 })
 
 export const UserIdSchema = z.object({
