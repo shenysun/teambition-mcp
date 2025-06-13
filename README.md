@@ -18,14 +18,14 @@ Teambition MCP (Model Context Protocol) 服务器是一个基于 MCP 协议实�
 
 ### 用户相关功能
 
-- ✅ `get-uid` - 根据邮箱获取用户uid
-- ✅ `get-user-info-by-uid` - 根据用户uid获取用户信息
-- ✅ `get-user-info-by-email` - 根据邮箱获取用户信息
+- ✅ `getUid` - 根据邮箱获取用户uid
+- ✅ `getUserInfoByUid` - 根据用户uid获取用户信息
+- ✅ `getUserInfoByEmail` - 根据邮箱获取用户信息
 
 ### 组织相关功能
 
-- ✅ `get-org-info` - 获取组织信息
-- ✅ `update-org-info` - 更新组织信息
+- ✅ `getOrgInfo` - 获取组织信息
+- ✅ `updateOrgInfo` - 更新组织信息
 
 ## 待实现功能 (TODO)
 
@@ -89,7 +89,7 @@ Teambition MCP (Model Context Protocol) 服务器是一个基于 MCP 协议实�
 
 ### 前置条件
 
-- Node.js 20.x 或更高版本
+- Node.js 20.0.0 或更高版本
 - pnpm 8.x 或更高版本
 
 ### 安装步骤

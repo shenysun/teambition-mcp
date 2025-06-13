@@ -7,6 +7,9 @@
   "license": "ISC",
   "keywords": ["Teambition", "AI", "MCP Server"],
   "main": "index.js",
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "scripts": {
     "dev": "tsup --watch --onSuccess 'node dist/index.js'",
     "lint": "eslint . --fix",
