@@ -7,11 +7,19 @@ import {
   registerArchiveTaskTool,
   registerCommentTaskTool,
   registerCreateTaskTool,
+  registerDeleteTaskTool,
   registerQueryTaskTool,
   registerSearchTaskTool,
   registerUpdateTaskContentTool,
+  registerUpdateTaskDueDateTool,
   registerUpdateTaskExecutorTool,
+  registerUpdateTaskInvolveMembersTool,
+  registerUpdateTaskNoteTool,
+  registerUpdateTaskPriorityTool,
+  registerUpdateTaskProgressTool,
+  registerUpdateTaskStartDateTool,
   registerUpdateTaskStatusTool,
+  registerUpdateTaskTagTool,
 } from './task'
 import {
   registerBatchQueryUsersTool,
@@ -54,4 +62,12 @@ export function registerAllTools(tbMCPServer: TbMCPServer) {
   registerArchiveTaskTool(tbMCPServer)
   registerCommentTaskTool(tbMCPServer)
   registerSearchTaskTool(tbMCPServer)
+  registerUpdateTaskDueDateTool(tbMCPServer)
+  registerUpdateTaskStartDateTool(tbMCPServer)
+  registerUpdateTaskNoteTool(tbMCPServer)
+  registerUpdateTaskPriorityTool(tbMCPServer)
+  registerUpdateTaskInvolveMembersTool(tbMCPServer)
+  registerUpdateTaskTagTool(tbMCPServer)
+  registerUpdateTaskProgressTool(tbMCPServer)
+  registerDeleteTaskTool(tbMCPServer)
 }
