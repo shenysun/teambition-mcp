@@ -1,5 +1,6 @@
 import type { TbMCPServer } from '../../server'
 import { getUserIdByEmail, GetUserIdByEmailSchema } from '../../../apis'
+import { logger } from '../../../utils'
 import { promise2ExecContent } from '../promise-exec'
 
 export function registerGetUidTool(tbMCPServer: TbMCPServer) {
@@ -9,8 +10,10 @@ export function registerGetUidTool(tbMCPServer: TbMCPServer) {
     parameters: GetUserIdByEmailSchema,
     timeoutMs: 10000,
     execute: async (args) => {
+      logger.info(`执行 get-uid 工具，参数: ${JSON.stringify(args)}`)
       return promise2ExecContent(
         getUserIdByEmail(args),
+        'get-uid',
       )
     },
   })
