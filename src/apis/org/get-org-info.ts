@@ -29,7 +29,7 @@ export type GetOrgInfo = z.infer<typeof GetOrgInfoSchema>
 
 /**
  * 获取组织信息
- * @param orgId 组织ID
+ * @param data 请求参数
  * @returns 组织信息
  */
 export function getOrgInfo(data: GetOrgInfo) {
