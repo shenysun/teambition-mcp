@@ -6,24 +6,108 @@
 # Description: 开发任务管理相关的 MCP 工具，包括任务查询、创建、更新、删除和评论功能，提供完整的任务生命周期管理能力
 # Details:
 1. 定义任务相关的 Zod 数据模式：
+   - HeaderSchema（通用请求头模式，包含租户ID和租户类型）
    - TaskSchema（任务对象结构）
    - QueryTaskSchema（任务查询参数）
+   - QueryTaskByShortIdsSchema（通过短ID查询任务参数）
+   - QueryTaskByParentSchema（通过父任务查询参数）
    - CreateTaskSchema（任务创建参数）
-   - UpdateTaskSchema（任务更新参数）
-   - DeleteTaskSchema（任务删除参数）
+   - UpdateTaskContentSchema（更新任务标题参数）
+   - UpdateTaskNoteSchema（更新任务备注参数）
+   - UpdateTaskExecutorSchema（更新任务执行者参数）
+   - UpdateTaskInvolveMembersSchema（更新任务参与者参数）
+   - UpdateTaskDueDateSchema（更新任务截止时间参数）
+   - UpdateTaskStartDateSchema（更新任务开始时间参数）
+   - UpdateTaskPrioritySchema（更新任务优先级参数）
+   - UpdateTaskTagsSchema（更新任务标签参数）
+   - UpdateTaskStatusSchema（更新任务状态参数）
+   - UpdateTaskProgressSchema（更新任务进度参数）
+   - UpdateTaskStoryPointSchema（更新任务StoryPoint参数）
+   - UpdateTaskSprintSchema（更新任务迭代参数）
+   - UpdateTaskParentSchema（更新任务父任务参数）
+   - UpdateTaskVisibleSchema（更新任务可见性参数）
+   - UpdateTaskStageSchema（更新任务列表参数）
+   - UpdateTaskSfcSchema（更新任务类型参数）
+   - CopyTaskSchema（复制任务参数）
+   - MoveTaskSchema（移动任务参数）
+   - CommentTaskSchema（评论任务参数）
+   - ArchiveTaskSchema（归档任务参数）
+   - DeleteTaskSchema（删除任务参数）
+   - SearchTaskSchema（搜索任务参数）
+   - AccessPolicyUpdateSchema（更新任务锁定动作参数）
+   - TaskResponseSchema（任务响应格式）
+   - TaskListResponseSchema（任务列表响应格式）
+   - TaskStatusListResponseSchema（任务状态列表响应格式）
+   - TaskCommentResponseSchema（任务评论响应格式）
+   - TaskSearchResponseSchema（任务搜索响应格式）
+   - TaskRtfRenderResponseSchema（任务富文本渲染响应格式）
+   - SimpleResponseSchema（简单操作响应格式）
 2. 实现任务 API 调用函数：
-   - queryTask()：查询任务详情
-   - createTask()：创建新任务
-   - updateTask()：更新任务属性
-   - deleteTask()：删除任务
-   - commentTask()：添加任务评论
+   - queryTask()：调用 /gateway/v3/task/query 接口查询任务详情
+   - queryAllTask()：调用 /gateway/all-task/query 接口查询自由任务和项目任务
+   - createTask()：调用 /gateway/v3/task/create 接口创建新任务
+   - updateTaskContent()：调用 /gateway/v3/task/{taskId}/content 接口更新任务标题
+   - updateTaskNote()：调用 /gateway/v3/task/{taskId}/note 接口更新任务备注
+   - updateTaskExecutor()：调用 /gateway/v3/task/{taskId}/executor 接口更新任务执行者
+   - updateTaskInvolveMembers()：调用 /gateway/v3/task/{taskId}/involveMembers 接口更新任务参与者
+   - updateTaskDueDate()：调用 /gateway/v3/task/{taskId}/dueDate 接口更新任务截止时间
+   - updateTaskStartDate()：调用 /gateway/v3/task/{taskId}/startDate 接口更新任务开始时间
+   - updateTaskPriority()：调用 /gateway/v3/task/{taskId}/priority 接口更新任务优先级
+   - updateTaskTags()：调用 /gateway/v3/task/{taskId}/tag 接口更新任务标签
+   - updateTaskStatus()：调用 /gateway/v3/task/{taskId}/taskflowstatus 接口更新任务状态
+   - updateTaskProgress()：调用 /gateway/v3/task/{taskId}/progress 接口更新任务进度
+   - updateTaskStoryPoint()：调用 /gateway/v3/task/{taskId}/storyPoint 接口更新任务StoryPoint
+   - updateTaskSprint()：调用 /gateway/v3/task/{taskId}/sprint 接口更新任务迭代
+   - updateTaskParent()：调用 /gateway/v3/task/{taskId}/parent 接口更新任务父任务
+   - updateTaskVisible()：调用 /gateway/v3/task/{taskId}/visible/update 接口更新任务可见性
+   - updateTaskStage()：调用 /gateway/v3/task/{taskId}/stage/update 接口更新任务列表
+   - updateTaskSfc()：调用 /gateway/v3/task/{taskId}/sfc/update 接口更新任务类型
+   - copyTask()：调用 /gateway/v3/task/{taskId}/copy 接口复制任务
+   - moveTask()：调用 /gateway/v3/task/{taskId}/move 接口移动任务
+   - commentTask()：调用 /gateway/v3/task/{taskId}/comment 接口评论任务
+   - archiveTask()：调用 /gateway/v3/task/{taskId}/archive 接口归档任务
+   - deleteTask()：调用 /gateway/v3/task/{taskId}/delete 接口删除任务
+   - searchTask()：调用 /gateway/all-task/search 接口搜索任务
+   - getTaskFlowStatus()：调用 /gateway/v3/task/{taskId}/flow-tfs 接口获取任务状态列表
+   - renderTaskRtf()：调用 /gateway/v3/task/rtf/render 接口渲染任务富文本
+   - updateTaskAccessPolicy()：调用 /gateway/v3/task/{taskId}/access-policy/update 接口更新任务锁定动作
+   - createApiRequest()：创建统一的API请求函数，处理请求头、超时等
+   - handleApiResponse()：统一处理API响应，包括错误处理和数据转换
 3. 开发 MCP 工具：
-   - task-query：支持通过任务 ID 或短 ID 查询任务
-   - task-create：创建任务，支持设置执行者、参与者、优先级等
-   - task-update：更新任务属性，支持差异更新
-   - task-delete：删除任务
-   - task-comment：添加任务评论
-4. 实现 registerTaskTools() 函数，统一注册所有任务工具
+   - queryTask：查询任务详情，支持通过任务 ID、短 ID 或父任务 ID 查询
+   - queryAllTask：查询自由任务和项目任务
+   - createTask：创建任务，支持设置执行者、参与者、优先级等
+   - updateTaskContent：更新任务标题
+   - updateTaskNote：更新任务备注
+   - updateTaskExecutor：更新任务执行者
+   - updateTaskInvolveMembers：更新任务参与者
+   - updateTaskDueDate：更新任务截止时间
+   - updateTaskStartDate：更新任务开始时间
+   - updateTaskPriority：更新任务优先级
+   - updateTaskTags：更新任务标签
+   - updateTaskStatus：更新任务状态
+   - updateTaskProgress：更新任务进度
+   - updateTaskStoryPoint：更新任务StoryPoint
+   - updateTaskSprint：更新任务迭代
+   - updateTaskParent：更新任务父任务
+   - updateTaskVisible：更新任务可见性
+   - updateTaskStage：更新任务列表
+   - updateTaskSfc：更新任务类型
+   - copyTask：复制任务
+   - moveTask：移动任务
+   - commentTask：评论任务
+   - archiveTask：归档任务
+   - deleteTask：删除任务
+   - searchTask：搜索任务
+   - getTaskFlowStatus：获取任务状态列表
+   - renderTaskRtf：渲染任务富文本
+   - updateTaskAccessPolicy：更新任务锁定动作
+4. 实现模块化注册函数：
+   - registerTaskQueryTools()：注册任务查询相关工具
+   - registerTaskCreateTools()：注册任务创建相关工具
+   - registerTaskUpdateTools()：注册任务更新相关工具
+   - registerTaskManageTools()：注册任务管理相关工具
+   - registerTaskTools()：统一注册所有任务工具
 5. 优化查询参数处理，移除空值和转换特殊条件
 6. 添加超时控制（10秒）和完善的错误处理机制
 
@@ -40,23 +124,23 @@
 ### Dependencies: None
 ### Description: 定义任务信息的数据结构和模式，包括任务实体、字段类型、验证规则等
 ### Details:
-创建任务数据模型，定义任务ID、标题、描述、状态、优先级、截止日期等核心字段，设置数据验证规则和约束条件，确保数据一致性和完整性
+创建任务数据模型，定义任务ID、标题、描述、状态、优先级、截止日期等核心字段，设置数据验证规则和约束条件，确保数据一致性和完整性。实现通用请求头模式、各类参数模式和响应模式，覆盖所有任务相关API的数据结构，包括任务查询、创建、更新、删除和评论等操作的请求和响应格式。
 
 ## 2. 任务API调用实现 [pending]
 ### Dependencies: 3.1
 ### Description: 实现任务信息查询的API接口，包括单个任务查询、批量查询和条件筛选功能
 ### Details:
-基于定义的数据模式实现RESTful API接口，包括GET /tasks/:id、GET /tasks等接口，实现错误处理、参数验证和响应格式化
+基于定义的数据模式实现任务相关的API调用函数，包括任务查询、创建、更新、删除和评论等功能。实现统一的API请求构建和响应处理机制，确保错误处理和超时控制的一致性。支持所有任务生命周期相关的操作，包括任务属性更新、状态变更、关系管理和搜索等功能，确保API调用的可靠性和稳定性。
 
 ## 3. MCP工具开发 [pending]
 ### Dependencies: 3.2
 ### Description: 开发基于MCP协议的任务查询工具，实现与外部系统的标准化交互
 ### Details:
-创建MCP工具类，实现任务查询的标准化接口，包括工具注册、参数解析、结果转换等功能，确保与MCP协议的兼容性
+创建MCP工具类，实现任务查询的标准化接口，包括工具注册、参数解析、结果转换等功能，确保与MCP协议的兼容性。针对每个API接口开发对应的MCP工具，提供统一的参数验证、错误处理和结果格式化。实现完整的任务生命周期管理能力，包括任务创建、查询、更新、删除和评论等功能，确保工具的易用性和可靠性。
 
 ## 4. 任务模块集成注册 [pending]
 ### Dependencies: 3.3
 ### Description: 将开发完成的任务模块注册到系统中，完成模块集成和功能测试
 ### Details:
-在系统中注册任务模块和MCP工具，配置路由和中间件，进行端到端测试，验证任务信息查询功能的完整性和可靠性
+在系统中注册任务模块和MCP工具，配置路由和中间件，进行端到端测试，验证任务信息查询功能的完整性和可靠性。实现模块化的工具注册机制，按照功能域分类注册工具，提高代码组织性和可维护性。完成所有工具的集成测试，确保在各种场景下的正确运行，包括异常处理和边界情况测试。
 
