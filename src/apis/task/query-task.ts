@@ -74,7 +74,7 @@ export async function queryTask(params: z.infer<typeof queryTaskParamsSchema>) {
   let request = tbServer.withTenant(orgId, 'organization')
 
   if (operatorId) {
-    request = request.withHeaders({ 'x-operator-id': operatorId })
+    request = request.withOperator(operatorId)
   }
 
   return request

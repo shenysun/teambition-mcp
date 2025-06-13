@@ -55,6 +55,6 @@ export async function commentTask(params: CommentTaskParams) {
 
   return tbServer
     .withTenant(orgId, 'organization')
-    .withHeaders({ 'x-operator-id': operatorId })
+    .withOperator(operatorId)
     .post<CommentTaskResponse>(`/gateway/v3/task/${taskId}/comment`, bodyParams)
 }

@@ -37,6 +37,6 @@ export async function updateTaskContent(params: UpdateTaskContentParams) {
 
   return tbServer
     .withTenant(orgId, 'organization')
-    .withHeaders({ 'x-operator-id': operatorId })
+    .withOperator(operatorId)
     .put<UpdateTaskContentResponse>(`/gateway/v3/task/${taskId}/content`, bodyParams)
 }

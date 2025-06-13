@@ -64,6 +64,6 @@ export async function createTask(params: CreateTaskParams) {
 
   return tbServer
     .withTenant(orgId, 'organization')
-    .withHeaders({ 'x-operator-id': operatorId })
+    .withOperator(operatorId)
     .post<CreateTaskResponse>('/gateway/v3/task/create', bodyParams)
 }

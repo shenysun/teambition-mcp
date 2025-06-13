@@ -34,6 +34,6 @@ export async function archiveTask(params: ArchiveTaskParams) {
 
   return tbServer
     .withTenant(orgId, 'organization')
-    .withHeaders({ 'x-operator-id': operatorId })
+    .withOperator(operatorId)
     .put<ArchiveTaskResponse>(`/gateway/v3/task/${taskId}/archive`, {})
 }
