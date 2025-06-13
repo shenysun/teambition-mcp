@@ -8,7 +8,7 @@
       "testStrategy": "1. 单元测试：验证 MCP 服务器初始化和配置正确性\n2. 集成测试：测试与 tws-auth 的认证集成\n3. 环境测试：验证不同环境配置的正确加载\n4. 错误处理测试：验证异常情况下的服务器稳定性",
       "priority": "high",
       "dependencies": [],
-      "status": "pending",
+      "status": "done",
       "subtasks": [
         {
           "id": 1,
@@ -61,7 +61,7 @@
             4
           ],
           "details": "包括端到端测试配置、性能基准测试、系统监控设置、配置优化调整。验收标准：所有组件集成测试通过，系统性能达到预期指标，监控告警机制正常运行。",
-          "status": "pending"
+          "status": "done"
         }
       ]
     },
