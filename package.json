@@ -12,7 +12,8 @@
   },
   "scripts": {
     "dev": "tsup --watch --onSuccess 'node dist/index.js'",
-    "lint": "eslint . --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
