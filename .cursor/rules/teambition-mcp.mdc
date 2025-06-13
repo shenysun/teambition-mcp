@@ -102,17 +102,6 @@ export function registerXxxTool(tbMCPServer: TbMCPServer) {
 
 更多关于类型系统的详细信息，请参考 [types.mdc](mdc:.cursor/rules/types.mdc)。
 
-## 已实现功能
-
-### 用户相关功能
-- `get-uid` - 根据邮箱获取用户uid
-- `get-user-info-by-uid` - 根据用户uid获取用户信息
-- `get-user-info-by-email` - 根据邮箱获取用户信息
-
-### 组织相关功能
-- `get-org-info` - 获取组织信息
-- `update-org-info` - 更新组织信息
-
 ## 开发新工具的步骤
 
 1. **确定工具类别**：确定新工具属于哪个功能类别（用户、组织、项目等）

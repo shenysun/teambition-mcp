@@ -5,15 +5,15 @@ import { promise2ExecContent } from '../promise-exec'
 
 export function registerGetUidTool(tbMCPServer: TbMCPServer) {
   tbMCPServer.server.addTool({
-    name: 'get-uid',
+    name: 'getUid',
     description: '根据邮箱获取用户 uid',
     parameters: GetUserIdByEmailSchema,
     timeoutMs: 10000,
     execute: async (args) => {
-      logger.info(`执行 get-uid 工具，参数: ${JSON.stringify(args)}`)
+      logger.info(`执行 getUid 工具，参数: ${JSON.stringify(args)}`)
       return promise2ExecContent(
         getUserIdByEmail(args),
-        'get-uid',
+        'getUid',
       )
     },
   })

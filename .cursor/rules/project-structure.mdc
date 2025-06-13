@@ -40,10 +40,41 @@ teambition-mcp/
 
 ### 特定文件类型命名
 
-- **MCP工具**: `动词-名词.ts`，例如 `get-uid.ts`、`update-org-info.ts`
+- **MCP工具文件**: `动词-名词.ts`，例如 `get-uid.ts`、`update-org-info.ts`
 - **类型定义**: `名词.types.ts`，例如 `user.types.ts`
 - **常量**: `名词.constants.ts`，例如 `api.constants.ts`
 - **测试文件**: `原文件名.test.ts`，例如 `get-uid.test.ts`
+
+## MCP 工具命名规范
+
+### 工具名称规则
+
+虽然工具文件名使用kebab-case，但工具名称本身必须使用camelCase（小驼峰）命名方式：
+
+- **正确示例**：`getUid`, `getUserInfoByEmail`, `updateOrgInfo`
+- **错误示例**：`get-uid`, `get_user_info`, `UpdateOrgInfo`
+
+### 工具命名示例
+
+```typescript
+// 在文件 get-uid.ts 中
+export function registerGetUidTool(tbMCPServer: TbMCPServer) {
+  tbMCPServer.server.addTool({
+    name: 'getUid', // 使用camelCase命名
+    description: '根据邮箱获取用户 uid',
+    // ...
+  })
+}
+
+// 在文件 get-user-info.ts 中
+export function registerGetUserInfoByEmailTool(tbMCPServer: TbMCPServer) {
+  tbMCPServer.server.addTool({
+    name: 'getUserInfoByEmail', // 使用camelCase命名
+    description: '根据用户邮箱获取用户信息',
+    // ...
+  })
+}
+```
 
 ## 模块结构
 
