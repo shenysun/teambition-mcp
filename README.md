@@ -16,16 +16,8 @@ Teambition MCP (Model Context Protocol) 服务器是一个基于 MCP 协议实�
 
 ## 已实现功能
 
-### 用户相关功能
-
-- ✅ `getUid` - 根据邮箱获取用户uid
-- ✅ `getUserInfoByUid` - 根据用户uid获取用户信息
-- ✅ `getUserInfoByEmail` - 根据邮箱获取用户信息
-
-### 组织相关功能
-
-- ✅ `getOrgInfo` - 获取组织信息
-- ✅ `updateOrgInfo` - 更新组织信息
+- ✅ 用户相关功能
+- ✅ 组织相关功能
 
 ## 待实现功能 (TODO)
 
