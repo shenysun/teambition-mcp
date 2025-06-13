@@ -1,6 +1,6 @@
 import { FastMCP } from 'fastmcp'
 import { name, version } from '../../package.json'
-import { registerAllTools } from './tools'
+import { registerAllTools } from './tools/register'
 
 /**
  * Start the MCP server
