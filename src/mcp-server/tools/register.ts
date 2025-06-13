@@ -4,6 +4,16 @@ import {
   registerUpdateOrgInfoTool,
 } from './org'
 import {
+  registerArchiveTaskTool,
+  registerCommentTaskTool,
+  registerCreateTaskTool,
+  registerQueryTaskTool,
+  registerSearchTaskTool,
+  registerUpdateTaskContentTool,
+  registerUpdateTaskExecutorTool,
+  registerUpdateTaskStatusTool,
+} from './task'
+import {
   registerBatchQueryUsersTool,
   registerCheckAppExistsTool,
   registerGetThirdAccountInfoTool,
@@ -31,7 +41,17 @@ export function registerAllTools(tbMCPServer: TbMCPServer) {
   registerGetUserByUniqueFieldTool(tbMCPServer)
   registerQueryIdMapTool(tbMCPServer)
 
-  // // 注册组织相关工具
+  // 注册组织相关工具
   registerGetOrgInfoTool(tbMCPServer)
   registerUpdateOrgInfoTool(tbMCPServer)
+
+  // 注册任务相关工具
+  registerQueryTaskTool(tbMCPServer)
+  registerCreateTaskTool(tbMCPServer)
+  registerUpdateTaskStatusTool(tbMCPServer)
+  registerUpdateTaskContentTool(tbMCPServer)
+  registerUpdateTaskExecutorTool(tbMCPServer)
+  registerArchiveTaskTool(tbMCPServer)
+  registerCommentTaskTool(tbMCPServer)
+  registerSearchTaskTool(tbMCPServer)
 }
