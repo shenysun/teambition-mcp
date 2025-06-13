@@ -31,5 +31,5 @@ export async function deleteTask(params: DeleteTaskParams) {
   return tbServer
     .withTenant(orgId, 'organization')
     .withOperator(operatorId)
-    .post<DeleteTaskResponse>(`/gateway/v3/task/${taskId}/delete`, {})
+    .post<DeleteTaskResponse>(`/v3/task/${taskId}/delete`, {})
 }

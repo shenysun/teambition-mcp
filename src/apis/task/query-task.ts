@@ -79,5 +79,5 @@ export async function queryTask(params: z.infer<typeof queryTaskParamsSchema>) {
 
   return request
     .withQuery(queryParams)
-    .get<QueryTaskResponse>('/gateway/v3/task/query')
+    .get<QueryTaskResponse>('/v3/task/query')
 }

@@ -21,6 +21,18 @@ import {
   registerUpdateTaskStatusTool,
   registerUpdateTaskTagTool,
 } from './task'
+import { registerCopyTaskTool } from './task/copy-task'
+import { registerGetTaskFlowStatusTool } from './task/get-task-flow-status'
+import { registerMoveTaskTool } from './task/move-task'
+import { registerQueryAllTaskTool } from './task/query-all-task'
+import { registerRenderTaskRtfTool } from './task/render-task-rtf'
+import { registerUpdateTaskAccessPolicyTool } from './task/update-task-access-policy'
+import { registerUpdateTaskParentTool } from './task/update-task-parent'
+import { registerUpdateTaskSfcTool } from './task/update-task-sfc'
+import { registerUpdateTaskSprintTool } from './task/update-task-sprint'
+import { registerUpdateTaskStageTool } from './task/update-task-stage'
+import { registerUpdateTaskStoryPointTool } from './task/update-task-story-point'
+import { registerUpdateTaskVisibleTool } from './task/update-task-visible'
 import {
   registerBatchQueryUsersTool,
   registerCheckAppExistsTool,
@@ -54,20 +66,32 @@ export function registerAllTools(tbMCPServer: TbMCPServer) {
   registerUpdateOrgInfoTool(tbMCPServer)
 
   // 注册任务相关工具
-  registerQueryTaskTool(tbMCPServer)
-  registerCreateTaskTool(tbMCPServer)
-  registerUpdateTaskStatusTool(tbMCPServer)
-  registerUpdateTaskContentTool(tbMCPServer)
-  registerUpdateTaskExecutorTool(tbMCPServer)
   registerArchiveTaskTool(tbMCPServer)
   registerCommentTaskTool(tbMCPServer)
-  registerSearchTaskTool(tbMCPServer)
-  registerUpdateTaskDueDateTool(tbMCPServer)
-  registerUpdateTaskStartDateTool(tbMCPServer)
-  registerUpdateTaskNoteTool(tbMCPServer)
-  registerUpdateTaskPriorityTool(tbMCPServer)
-  registerUpdateTaskInvolveMembersTool(tbMCPServer)
-  registerUpdateTaskTagTool(tbMCPServer)
-  registerUpdateTaskProgressTool(tbMCPServer)
+  registerCopyTaskTool(tbMCPServer)
+  registerCreateTaskTool(tbMCPServer)
   registerDeleteTaskTool(tbMCPServer)
+  registerGetTaskFlowStatusTool(tbMCPServer)
+  registerMoveTaskTool(tbMCPServer)
+  registerQueryAllTaskTool(tbMCPServer)
+  registerQueryTaskTool(tbMCPServer)
+  registerRenderTaskRtfTool(tbMCPServer)
+  registerSearchTaskTool(tbMCPServer)
+  registerUpdateTaskAccessPolicyTool(tbMCPServer)
+  registerUpdateTaskContentTool(tbMCPServer)
+  registerUpdateTaskDueDateTool(tbMCPServer)
+  registerUpdateTaskExecutorTool(tbMCPServer)
+  registerUpdateTaskInvolveMembersTool(tbMCPServer)
+  registerUpdateTaskNoteTool(tbMCPServer)
+  registerUpdateTaskParentTool(tbMCPServer)
+  registerUpdateTaskPriorityTool(tbMCPServer)
+  registerUpdateTaskProgressTool(tbMCPServer)
+  registerUpdateTaskSfcTool(tbMCPServer)
+  registerUpdateTaskSprintTool(tbMCPServer)
+  registerUpdateTaskStageTool(tbMCPServer)
+  registerUpdateTaskStartDateTool(tbMCPServer)
+  registerUpdateTaskStatusTool(tbMCPServer)
+  registerUpdateTaskStoryPointTool(tbMCPServer)
+  registerUpdateTaskTagTool(tbMCPServer)
+  registerUpdateTaskVisibleTool(tbMCPServer)
 }

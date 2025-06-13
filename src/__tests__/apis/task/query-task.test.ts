@@ -63,7 +63,7 @@ describe('queryTask', () => {
     expect(tbServer.withTenant).toHaveBeenCalledWith('org-id-1', 'organization')
     expect(tbServer.withOperator).toHaveBeenCalledWith('operator-id-1')
     expect(tbServer.withQuery).toHaveBeenCalledWith({ taskId: 'task-id-1' })
-    expect(tbServer.get).toHaveBeenCalledWith('/gateway/v3/task/query')
+    expect(tbServer.get).toHaveBeenCalledWith('/v3/task/query')
 
     expect(result).toEqual({
       data: {

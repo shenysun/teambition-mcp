@@ -40,5 +40,5 @@ export async function updateTaskStartDate(params: UpdateTaskStartDateParams) {
   return tbServer
     .withTenant(orgId, 'organization')
     .withOperator(operatorId)
-    .put<UpdateTaskStartDateResponse>(`/gateway/v3/task/${taskId}/startDate`, bodyParams)
+    .put<UpdateTaskStartDateResponse>(`/v3/task/${taskId}/startDate`, bodyParams)
 }

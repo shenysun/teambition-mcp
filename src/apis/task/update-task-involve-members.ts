@@ -42,5 +42,5 @@ export async function updateTaskInvolveMembers(params: UpdateTaskInvolveMembersP
   return tbServer
     .withTenant(orgId, 'organization')
     .withOperator(operatorId)
-    .put<UpdateTaskInvolveMembersResponse>(`/gateway/v3/task/${taskId}/involveMembers`, bodyParams)
+    .put<UpdateTaskInvolveMembersResponse>(`/v3/task/${taskId}/involveMembers`, bodyParams)
 }

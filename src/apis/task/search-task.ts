@@ -37,5 +37,5 @@ export async function searchTask(params: SearchTaskParams) {
   return tbServer
     .withTenant(orgId, 'organization')
     .withQuery(queryParams)
-    .get<SearchTaskResponse>('/gateway/all-task/search')
+    .get<SearchTaskResponse>('/all-task/search')
 }

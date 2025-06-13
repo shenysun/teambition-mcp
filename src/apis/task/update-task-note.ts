@@ -38,5 +38,5 @@ export async function updateTaskNote(params: UpdateTaskNoteParams) {
   return tbServer
     .withTenant(orgId, 'organization')
     .withOperator(operatorId)
-    .put<UpdateTaskNoteResponse>(`/gateway/v3/task/${taskId}/note`, bodyParams)
+    .put<UpdateTaskNoteResponse>(`/v3/task/${taskId}/note`, bodyParams)
 }

@@ -40,5 +40,5 @@ export async function updateTaskTag(params: UpdateTaskTagParams) {
   return tbServer
     .withTenant(orgId, 'organization')
     .withOperator(operatorId)
-    .put<UpdateTaskTagResponse>(`/gateway/v3/task/${taskId}/tag`, bodyParams)
+    .put<UpdateTaskTagResponse>(`/v3/task/${taskId}/tag`, bodyParams)
 }

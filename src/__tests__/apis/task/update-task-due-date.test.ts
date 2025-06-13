@@ -37,7 +37,7 @@ describe('updateTaskDueDate', () => {
 
     // 验证API调用
     expect(putSpy).toHaveBeenCalledWith(
-      `/gateway/v3/task/${mockParams.taskId}/dueDate`,
+      `/v3/task/${mockParams.taskId}/dueDate`,
       {
         dueDate: mockParams.dueDate,
       },
@@ -60,7 +60,7 @@ describe('updateTaskDueDate', () => {
 
     // 验证API调用，包含可选参数
     expect(putSpy).toHaveBeenCalledWith(
-      `/gateway/v3/task/${mockParams.taskId}/dueDate`,
+      `/v3/task/${mockParams.taskId}/dueDate`,
       {
         dueDate: mockParams.dueDate,
         disableActivity: true,

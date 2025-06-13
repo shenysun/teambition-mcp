@@ -38,5 +38,5 @@ export async function updateTaskPriority(params: UpdateTaskPriorityParams) {
   return tbServer
     .withTenant(orgId, 'organization')
     .withOperator(operatorId)
-    .put<UpdateTaskPriorityResponse>(`/gateway/v3/task/${taskId}/priority`, bodyParams)
+    .put<UpdateTaskPriorityResponse>(`/v3/task/${taskId}/priority`, bodyParams)
 }

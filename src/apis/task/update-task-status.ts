@@ -39,5 +39,5 @@ export async function updateTaskStatus(params: UpdateTaskStatusParams) {
   return tbServer
     .withTenant(orgId, 'organization')
     .withOperator(operatorId)
-    .put<UpdateTaskStatusResponse>(`/gateway/v3/task/${taskId}/taskflowstatus`, bodyParams)
+    .put<UpdateTaskStatusResponse>(`/v3/task/${taskId}/taskflowstatus`, bodyParams)
 }

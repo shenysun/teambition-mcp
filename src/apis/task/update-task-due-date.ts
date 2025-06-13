@@ -40,5 +40,5 @@ export async function updateTaskDueDate(params: UpdateTaskDueDateParams) {
   return tbServer
     .withTenant(orgId, 'organization')
     .withOperator(operatorId)
-    .put<UpdateTaskDueDateResponse>(`/gateway/v3/task/${taskId}/dueDate`, bodyParams)
+    .put<UpdateTaskDueDateResponse>(`/v3/task/${taskId}/dueDate`, bodyParams)
 }

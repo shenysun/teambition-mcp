@@ -4,41 +4,40 @@ import { getOrgId } from '../../constants/env'
 import { TBResponseSchema } from '../../types/response'
 import { tbServer } from '../request'
 
-// 更新任务进度的请求参数模式
-export const updateTaskProgressParamsSchema = z.object({
+// 更新任务可见性的请求参数模式
+export const updateTaskVisibleParamsSchema = z.object({
   taskId: z.string().describe('任务ID'),
   orgId: z.string().optional().describe('企业ID'),
   operatorId: z.string().describe('操作者ID'),
-  progress: z.number().int().optional().describe('进度'),
+  visible: z.string().optional().describe('任务可见性 involves = 隐私任务 members = 公开任务'),
   disableActivity: z.boolean().optional().describe('是否忽略触发动态'),
   disableNotification: z.boolean().optional().describe('是否忽略触发通知'),
 })
 
-// 更新任务进度响应模式
-export const updateTaskProgressResponseSchema = TBResponseSchema(
+// 更新任务可见性响应模式
+export const updateTaskVisibleResponseSchema = TBResponseSchema(
   z.object({
-    progress: z.number().int().describe('进度'),
-    updated: z.string().optional().describe('更新时间'),
+    visible: z.string().describe('可见性'),
+    updated: z.string().describe('更新时间'),
   }),
 )
 
 // 响应类型
-export type UpdateTaskProgressParams = z.infer<typeof updateTaskProgressParamsSchema>
-export type UpdateTaskProgressResponse = TBResponse<{
-  progress: number
-  updated?: string
+export type UpdateTaskVisibleResponse = TBResponse<{
+  visible: string
+  updated: string
 }>
 
 /**
- * 更新任务进度
- * @param params 更新任务进度参数
+ * 更新任务可见性
+ * @param params 更新任务可见性参数
  * @returns 更新结果
  */
-export async function updateTaskProgress(params: UpdateTaskProgressParams) {
+export async function updateTaskVisible(params: z.infer<typeof updateTaskVisibleParamsSchema>) {
   const { taskId, orgId = getOrgId(), operatorId, ...bodyParams } = params
 
   return tbServer
     .withTenant(orgId, 'organization')
     .withOperator(operatorId)
-    .put<UpdateTaskProgressResponse>(`/v3/task/${taskId}/progress`, bodyParams)
+    .post<UpdateTaskVisibleResponse>(`/v3/task/${taskId}/visible/update`, bodyParams)
 }
