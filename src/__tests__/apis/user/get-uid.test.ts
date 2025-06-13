@@ -28,10 +28,10 @@ describe('get-uid.ts', () => {
       expect(result.success).toBe(true)
     })
 
-    it('getUserIdByEmailSchema 应该拒绝缺少必填字段的数据', () => {
+    it('getUserIdByEmailSchema 允许缺少 orgId', () => {
       const data = { email: 'test@example.com' }
       const result = getUserIdByEmailSchema.safeParse(data)
-      expect(result.success).toBe(false)
+      expect(result.success).toBe(true)
     })
 
     it('getUserIdByEmailSchema 应该接受任何字符串作为邮箱', () => {

@@ -18,6 +18,7 @@
     "test": "vitest",
     "test:coverage": "vitest run --coverage",
     "test:ui": "vitest --ui",
+    "check": "pnpm run lint && pnpm run type-check && pnpm run test --no-watch",
     "mcp:inspector": "npx @modelcontextprotocol/inspector@latest node dist/index.js"
   },
   "dependencies": {

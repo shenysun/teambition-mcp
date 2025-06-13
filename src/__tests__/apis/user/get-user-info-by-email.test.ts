@@ -1,6 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { tbServer } from '../../../apis/request'
-import { getUserInfo, type GetUserInfo, getUserInfoSchema, userInfoSchema } from '../../../apis/user/get-user-info'
+import { getUserInfoByEmail, type GetUserInfoByEmail, getUserInfoByEmailSchema } from '../../../apis/user/get-user-info-by-email'
+import { userInfoSchema } from '../../../apis/user/get-user-info-by-uid'
 
 // Mock tbServer
 vi.mock('../../../apis/request', () => ({
@@ -11,27 +12,21 @@ vi.mock('../../../apis/request', () => ({
   },
 }))
 
-describe('get-user-info.ts', () => {
+describe('get-user-info-by-email.ts', () => {
   beforeEach(() => {
     vi.clearAllMocks()
   })
 
   describe('schema 验证', () => {
-    it('getUserInfoSchema 应该验证通过 userId 方式的数据', () => {
-      const data = { orgId: 'org123', userId: 'user123' }
-      const result = getUserInfoSchema.safeParse(data)
-      expect(result.success).toBe(true)
-    })
-
-    it('getUserInfoSchema 应该验证通过邮箱方式的数据', () => {
+    it('getUserInfoByEmailSchema 应该验证通过 email 方式的数据', () => {
       const data = { orgId: 'org123', email: 'test@example.com' }
-      const result = getUserInfoSchema.safeParse(data)
+      const result = getUserInfoByEmailSchema.safeParse(data)
       expect(result.success).toBe(true)
     })
 
-    it('getUserInfoSchema 应该拒绝无效数据', () => {
+    it('getUserInfoByEmailSchema 应该拒绝无效数据', () => {
       const data = { orgId: 'org123' }
-      const result = getUserInfoSchema.safeParse(data)
+      const result = getUserInfoByEmailSchema.safeParse(data)
       expect(result.success).toBe(false)
     })
 
@@ -46,26 +41,7 @@ describe('get-user-info.ts', () => {
     })
   })
 
-  describe('getUserInfo 函数', () => {
-    it('应该通过 userId 获取用户信息', async () => {
-      const mockResponse = {
-        success: true,
-        result: {
-          avatarUrl: 'https://example.com/avatar.jpg',
-          id: 'user123',
-          name: '测试用户',
-        },
-      }
-      vi.mocked(tbServer.get).mockResolvedValue(mockResponse)
-
-      const data: GetUserInfo = { orgId: 'org123', userId: 'user123' }
-      await getUserInfo(data)
-
-      expect(tbServer.withTenant).toHaveBeenCalledWith('org123', 'organization')
-      expect(tbServer.withQuery).toHaveBeenCalledWith({ userId: 'user123' })
-      expect(tbServer.get).toHaveBeenCalledWith('user/info')
-    })
-
+  describe('getUserInfoByEmail 函数', () => {
     it('应该通过 email 获取用户信息', async () => {
       const mockResponse = {
         success: true,
@@ -77,17 +53,32 @@ describe('get-user-info.ts', () => {
       }
       vi.mocked(tbServer.get).mockResolvedValue(mockResponse)
 
-      const data: GetUserInfo = { orgId: 'org123', email: 'test@example.com' }
-      await getUserInfo(data)
+      const data: GetUserInfoByEmail = { orgId: 'org123', email: 'test@example.com' }
+      await getUserInfoByEmail(data)
 
       expect(tbServer.withTenant).toHaveBeenCalledWith('org123', 'organization')
       expect(tbServer.withQuery).toHaveBeenCalledWith({ email: 'test@example.com' })
       expect(tbServer.get).toHaveBeenCalledWith('user/query')
     })
 
-    it('应该在数据无效时抛出错误', () => {
-      const invalidData = { orgId: 'org123' } as GetUserInfo
-      expect(() => getUserInfo(invalidData)).toThrow('Invalid user info data')
+    it('应该使用默认的企业ID', async () => {
+      const mockResponse = {
+        success: true,
+        result: {
+          avatarUrl: 'https://example.com/avatar.jpg',
+          id: 'user123',
+          name: '测试用户',
+        },
+      }
+      vi.mocked(tbServer.get).mockResolvedValue(mockResponse)
+
+      const data: GetUserInfoByEmail = { email: 'test@example.com' }
+      await getUserInfoByEmail(data)
+
+      // 这里假设 getOrgId() 返回的是一个默认值，实际测试中可能需要模拟 getOrgId
+      expect(tbServer.withTenant).toHaveBeenCalled()
+      expect(tbServer.withQuery).toHaveBeenCalledWith({ email: 'test@example.com' })
+      expect(tbServer.get).toHaveBeenCalledWith('user/query')
     })
 
     it('应该正确处理 API 响应', async () => {
@@ -101,8 +92,8 @@ describe('get-user-info.ts', () => {
       }
       vi.mocked(tbServer.get).mockResolvedValue(mockResponse)
 
-      const data: GetUserInfo = { orgId: 'org123', userId: 'user123' }
-      const result = await getUserInfo(data)
+      const data: GetUserInfoByEmail = { orgId: 'org123', email: 'test@example.com' }
+      const result = await getUserInfoByEmail(data)
 
       expect(result).toEqual(mockResponse)
     })
