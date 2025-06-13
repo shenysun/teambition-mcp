@@ -12,7 +12,7 @@
   },
   "scripts": {
     "dev": "tsup --watch --onSuccess 'node dist/index.js'",
-    "tsc": "tsc --noEmit",
+    "type-check": "tsc --noEmit",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test": "vitest",

@@ -28,6 +28,9 @@ jobs:
 
       - name: Run ESLint
         run: pnpm run lint
+        
+      - name: Run TypeScript type checking
+        run: pnpm run type-check
 
       - name: Run tests with coverage
         run: pnpm run test:coverage
