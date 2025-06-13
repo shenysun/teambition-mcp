@@ -8,7 +8,7 @@ import { tbServer } from '../request'
 export const updateTaskContentParamsSchema = z.object({
   taskId: z.string().describe('任务ID'),
   content: z.string().optional().describe('任务标题'),
-  orgId: z.string().describe('企业ID'),
+  orgId: z.string().optional().describe('企业ID'),
   operatorId: z.string().describe('操作者ID'),
 })
 

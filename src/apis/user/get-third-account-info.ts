@@ -6,7 +6,7 @@ import { tbServer } from '../request'
 export const getThirdAccountInfoSchema = z.object({
   openId: z.string().describe('三方账号 ID'),
   refer: z.string().describe('三方账号来源'),
-  orgId: z.string().optional().describe('组织ID'),
+  orgId: z.string().optional().describe('企业ID'),
 })
 
 export const thirdAccountInfoSchema = z.object({

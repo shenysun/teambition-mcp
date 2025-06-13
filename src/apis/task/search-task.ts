@@ -9,7 +9,7 @@ export const searchTaskParamsSchema = z.object({
   tql: z.string().optional().describe('企业下任务搜索TQL语句 参考 TQL查询文档'),
   pageSize: z.number().int().optional().describe('分页长度'),
   pageToken: z.string().optional().describe('分页标'),
-  orgId: z.string().describe('企业ID'),
+  orgId: z.string().optional().describe('企业ID'),
 })
 
 // 搜索任务响应模式

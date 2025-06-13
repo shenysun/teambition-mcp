@@ -8,7 +8,7 @@ export const batchQueryUsersSchema = z.object({
   openIds: z.array(z.string()).optional().describe('用户 openId 数组，根据 openId 查询时必填'),
   pageSize: z.number().optional().describe('分页大小，默认为 30， 最大为 1000'),
   pageToken: z.string().optional().describe('分页 token, 用于获取下一页数据'),
-  orgId: z.string().optional().describe('组织ID'),
+  orgId: z.string().optional().describe('企业ID'),
 })
 
 export const userDetailSchema = z.object({

@@ -8,7 +8,7 @@ export const queryIdMapSchema = z.object({
   tbId: z.string().optional().describe('用户在 Teambition 中的用户 ID'),
   refId: z.string().optional().describe('绑定关系标识符，比如钉钉企业的 corpId'),
   extraUserId: z.string().optional().describe('tb 方绑定的 id，比如钉钉平台返回的用户 staffId'),
-  orgId: z.string().optional().describe('组织ID'),
+  orgId: z.string().optional().describe('企业ID'),
 })
 
 export const idMapExtraSchema = z.object({

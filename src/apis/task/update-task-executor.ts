@@ -10,7 +10,7 @@ export const updateTaskExecutorParamsSchema = z.object({
   executorId: z.string().optional().describe('执行者用户ID'),
   disableActivity: z.boolean().optional().describe('是否忽略触发动态'),
   disableNotification: z.boolean().optional().describe('是否忽略触发通知'),
-  orgId: z.string().describe('企业ID'),
+  orgId: z.string().optional().describe('企业ID'),
   operatorId: z.string().describe('操作者用户ID'),
 })
 

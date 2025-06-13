@@ -43,7 +43,7 @@ export const createTaskParamsSchema = z.object({
       metaString: z.string().optional().describe('字段值元信息(json格式)；若要添加任务附件到文件字段，则需要在 metaString 中填写 "fileToken":"xxx" ，可调用创建文件上传凭证接口获得'),
     })).optional().describe('自定义字段值列表'),
   })).optional().describe('自定义字段值列表'),
-  orgId: z.string().describe('企业ID'),
+  orgId: z.string().optional().describe('企业ID'),
   operatorId: z.string().describe('任务创建人'),
 })
 

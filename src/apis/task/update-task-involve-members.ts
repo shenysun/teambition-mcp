@@ -7,7 +7,7 @@ import { tbServer } from '../request'
 // 更新任务参与者的请求参数模式
 export const updateTaskInvolveMembersParamsSchema = z.object({
   taskId: z.string().describe('任务ID'),
-  orgId: z.string().describe('企业ID'),
+  orgId: z.string().optional().describe('企业ID'),
   operatorId: z.string().describe('操作者ID'),
   involveMembers: z.array(z.string()).optional().describe('更新任务参与者列表'),
   addInvolvers: z.array(z.string()).optional().describe('新增参与者列表'),

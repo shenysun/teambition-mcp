@@ -5,7 +5,7 @@ import { tbServer } from '../request'
 
 export const getUserPreferencesSchema = z.object({
   userId: z.string().describe('用户ID'),
-  orgId: z.string().optional().describe('组织ID'),
+  orgId: z.string().optional().describe('企业ID'),
 })
 
 export const userPreferencesSchema = z.object({

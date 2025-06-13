@@ -5,7 +5,7 @@ import { tbServer } from '../request'
 
 export const checkAppExistsSchema = z.object({
   userIds: z.array(z.string()).describe('用户 ID 数组'),
-  orgId: z.string().optional().describe('组织ID'),
+  orgId: z.string().optional().describe('企业ID'),
 })
 
 export type CheckAppExists = z.infer<typeof checkAppExistsSchema>

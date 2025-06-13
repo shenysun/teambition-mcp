@@ -9,7 +9,7 @@ export const queryTaskParamsSchema = z.object({
   taskId: z.string().optional().describe('任务ID集合,使用逗号分隔,和parentTaskId冲突(选其一)'),
   shortIds: z.string().optional().describe('任务短ID集合,使用逗号分隔'),
   parentTaskId: z.string().optional().describe('父任务ID,和taskIds冲突(选其一)'),
-  orgId: z.string().describe('企业ID'),
+  orgId: z.string().optional().describe('企业ID'),
   operatorId: z.string().optional().describe('查询人ID, 如果存在会检查该成员可见的任务'),
 })
 

@@ -10,7 +10,7 @@ export const commentTaskParamsSchema = z.object({
   content: z.string().optional().describe('评论内容'),
   renderMode: z.string().optional().describe('评论内容 原文 还是以 markdown 等格式. 默认是原文输出'),
   mentionUserIds: z.array(z.string()).optional().describe('评论 at 成员列表, 单次 at 上限30'),
-  orgId: z.string().describe('企业ID'),
+  orgId: z.string().optional().describe('企业ID'),
   operatorId: z.string().describe('评论人ID'),
 })
 

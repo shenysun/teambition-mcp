@@ -9,7 +9,7 @@ export const updateTaskStatusParamsSchema = z.object({
   taskId: z.string().describe('任务ID'),
   taskflowstatusId: z.string().optional().describe('任务状态ID'),
   tfsUpdateNote: z.string().optional().describe('任务流转说明'),
-  orgId: z.string().describe('企业ID'),
+  orgId: z.string().optional().describe('企业ID'),
   operatorId: z.string().describe('操作者ID'),
 })
 

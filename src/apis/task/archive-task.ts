@@ -7,7 +7,7 @@ import { tbServer } from '../request'
 // 归档任务的请求参数模式
 export const archiveTaskParamsSchema = z.object({
   taskId: z.string().describe('任务ID'),
-  orgId: z.string().describe('企业ID'),
+  orgId: z.string().optional().describe('企业ID'),
   operatorId: z.string().describe('操作者ID'),
 })
 

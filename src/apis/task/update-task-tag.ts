@@ -7,7 +7,7 @@ import { tbServer } from '../request'
 // 更新任务标签的请求参数模式
 export const updateTaskTagParamsSchema = z.object({
   taskId: z.string().describe('任务ID'),
-  orgId: z.string().describe('企业ID'),
+  orgId: z.string().optional().describe('企业ID'),
   operatorId: z.string().describe('操作者ID'),
   tagIds: z.array(z.string()).optional().describe('替换的标签ID集合'),
   delTagIds: z.array(z.string()).optional().describe('删除的标签ID集合'),
