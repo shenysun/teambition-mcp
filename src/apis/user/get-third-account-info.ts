@@ -3,13 +3,13 @@ import { z } from 'zod'
 import { getOrgId } from '../../constants/env'
 import { tbServer } from '../request'
 
-export const GetThirdAccountInfoSchema = z.object({
+export const getThirdAccountInfoSchema = z.object({
   openId: z.string().describe('三方账号 ID'),
   refer: z.string().describe('三方账号来源'),
   orgId: z.string().optional().describe('组织ID'),
 })
 
-export const ThirdAccountInfoSchema = z.object({
+export const thirdAccountInfoSchema = z.object({
   id: z.string().describe('绑定关系存储模型 ID'),
   userId: z.string().describe('用户 ID'),
   openId: z.string().describe('三方账号 ID'),
@@ -20,8 +20,8 @@ export const ThirdAccountInfoSchema = z.object({
   updated: z.string().describe('更新时间'),
 })
 
-export type GetThirdAccountInfo = z.infer<typeof GetThirdAccountInfoSchema>
-export type ThirdAccountInfo = z.infer<typeof ThirdAccountInfoSchema>
+export type GetThirdAccountInfo = z.infer<typeof getThirdAccountInfoSchema>
+export type ThirdAccountInfo = z.infer<typeof thirdAccountInfoSchema>
 export type ThirdAccountInfoResponse = TBResponse<ThirdAccountInfo>
 
 export function getThirdAccountInfo(data: GetThirdAccountInfo) {

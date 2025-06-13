@@ -2,12 +2,12 @@ import type { z } from 'zod'
 import type { OrgInfoResponse } from './get-org-info'
 import { getOrgId } from '../../constants'
 import { tbServer } from '../request'
-import { OrgInfoSchema } from './get-org-info'
+import { orgInfoSchema } from './get-org-info'
 
 /**
  * 更新组织信息
  */
-export const UpdateOrgInfoSchema = OrgInfoSchema.partial({
+export const updateOrgInfoSchema = orgInfoSchema.partial({
   orgId: true,
   description: true,
   isPublic: true,
@@ -17,7 +17,7 @@ export const UpdateOrgInfoSchema = OrgInfoSchema.partial({
   py: true,
 })
 
-export type UpdateOrgInfo = z.infer<typeof UpdateOrgInfoSchema>
+export type UpdateOrgInfo = z.infer<typeof updateOrgInfoSchema>
 
 /**
  * 更新组织信息

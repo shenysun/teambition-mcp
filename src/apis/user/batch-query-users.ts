@@ -3,7 +3,7 @@ import { z } from 'zod'
 import { getOrgId } from '../../constants/env'
 import { tbServer } from '../request'
 
-export const BatchQueryUsersSchema = z.object({
+export const batchQueryUsersSchema = z.object({
   ids: z.array(z.string()).optional().describe('用户 ID 数组，根据用户 ID 查询时必填'),
   openIds: z.array(z.string()).optional().describe('用户 openId 数组，根据 openId 查询时必填'),
   pageSize: z.number().optional().describe('分页大小，默认为 30， 最大为 1000'),
@@ -11,7 +11,7 @@ export const BatchQueryUsersSchema = z.object({
   orgId: z.string().optional().describe('组织ID'),
 })
 
-export const UserDetailSchema = z.object({
+export const userDetailSchema = z.object({
   userId: z.string().describe('用户ID'),
   avatarUrl: z.string().describe('用户头像URL'),
   name: z.string().describe('用户昵称'),
@@ -23,8 +23,8 @@ export const UserDetailSchema = z.object({
   openId: z.string().optional().describe('openId'),
 })
 
-export type BatchQueryUsers = z.infer<typeof BatchQueryUsersSchema>
-export type UserDetail = z.infer<typeof UserDetailSchema>
+export type BatchQueryUsers = z.infer<typeof batchQueryUsersSchema>
+export type UserDetail = z.infer<typeof userDetailSchema>
 export type BatchQueryUsersResponse = TBResponse<UserDetail[]>
 
 export function batchQueryUsers(data: BatchQueryUsers) {

@@ -7,7 +7,7 @@ import { registerBatchQueryUsersTool } from '../../../../mcp-server/tools/user/b
 vi.mock('../../../../apis/user/batch-query-users', () => {
   return {
     batchQueryUsers: vi.fn(),
-    BatchQueryUsersSchema: {
+    batchQueryUsersSchema: {
       parse: vi.fn(),
     },
   }
@@ -28,7 +28,7 @@ describe('batchQueryUsers MCP工具', () => {
     expect(mockServer.addTool).toHaveBeenCalledWith({
       name: 'batchQueryUsers',
       description: '批量查询用户信息',
-      parameters: api.BatchQueryUsersSchema,
+      parameters: api.batchQueryUsersSchema,
       timeoutMs: 10000,
       execute: expect.any(Function),
     })

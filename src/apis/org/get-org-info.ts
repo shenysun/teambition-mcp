@@ -6,7 +6,7 @@ import { tbServer } from '../request'
 /**
  * 组织信息
  */
-export const OrgInfoSchema = z.object({
+export const orgInfoSchema = z.object({
   operatorId: z.string().describe('操作用户ID'),
   orgId: z.string().describe('组织ID'),
   description: z.string().describe('组织描述'),
@@ -17,15 +17,15 @@ export const OrgInfoSchema = z.object({
   py: z.string().describe('拼音缩写'),
 })
 
-export const OrgInfoResponseSchema = TBResponseSchema(OrgInfoSchema)
-export type OrgInfo = z.infer<typeof OrgInfoSchema>
+export const orgInfoResponseSchema = TBResponseSchema(orgInfoSchema)
+export type OrgInfo = z.infer<typeof orgInfoSchema>
 export type OrgInfoResponse = TBResponse<OrgInfo>
 
-export const GetOrgInfoSchema = z.object({
+export const getOrgInfoSchema = z.object({
   orgId: z.string().optional().describe('组织ID'),
 })
 
-export type GetOrgInfo = z.infer<typeof GetOrgInfoSchema>
+export type GetOrgInfo = z.infer<typeof getOrgInfoSchema>
 
 /**
  * 获取组织信息

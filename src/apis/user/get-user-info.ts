@@ -4,34 +4,34 @@ import { z } from 'zod'
 import { getOrgId } from '../../constants'
 import { tbServer } from '../request'
 
-export const GetUserInfoByUidSchema = z.object({
+export const getUserInfoByUidSchema = z.object({
   userId: z.string().describe('用户ID'),
   orgId: z.string().optional().describe('组织ID'),
 })
 
-export const GetUserInfoByEmailSchema = z.object({
+export const getUserInfoByEmailSchema = z.object({
   email: z.string().describe('用户邮箱'),
   orgId: z.string().optional().describe('组织ID'),
 })
 
-export const GetUserInfoSchema = z.union([GetUserInfoByUidSchema, GetUserInfoByEmailSchema])
+export const getUserInfoSchema = z.union([getUserInfoByUidSchema, getUserInfoByEmailSchema])
 
-export const UserInfoSchema = z.object({
+export const userInfoSchema = z.object({
   avatarUrl: z.string().describe('头像URL'),
   id: z.string().describe('用户ID'),
   name: z.string().describe('用户名'),
 })
 
-export type GetUserInfoByUid = z.infer<typeof GetUserInfoByUidSchema>
-export type GetUserInfoByEmail = z.infer<typeof GetUserInfoByEmailSchema>
-export type GetUserInfo = z.infer<typeof GetUserInfoSchema>
-export type UserInfo = z.infer<typeof UserInfoSchema>
+export type GetUserInfoByUid = z.infer<typeof getUserInfoByUidSchema>
+export type GetUserInfoByEmail = z.infer<typeof getUserInfoByEmailSchema>
+export type GetUserInfo = z.infer<typeof getUserInfoSchema>
+export type UserInfo = z.infer<typeof userInfoSchema>
 export type UserInfoResponse = TBResponse<UserInfo>
 
 export function getUserInfo(data: GetUserInfo) {
   const query: Data = {}
   let path = ''
-  const parseResult = GetUserInfoSchema.safeParse(data)
+  const parseResult = getUserInfoSchema.safeParse(data)
   if (!parseResult.success) {
     throw new Error('Invalid user info data')
   }

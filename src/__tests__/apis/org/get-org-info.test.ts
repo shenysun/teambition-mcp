@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { getOrgInfo, OrgInfoSchema } from '../../../apis/org/get-org-info'
+import { getOrgInfo, orgInfoSchema } from '../../../apis/org/get-org-info'
 import { tbServer } from '../../../apis/request'
 
 // Mock tbServer
@@ -32,7 +32,7 @@ describe('get-org-info.ts', () => {
         pinyin: 'ceshi',
         py: 'cs',
       }
-      const result = OrgInfoSchema.safeParse(orgInfo)
+      const result = orgInfoSchema.safeParse(orgInfo)
       expect(result.success).toBe(true)
     })
 
@@ -42,7 +42,7 @@ describe('get-org-info.ts', () => {
         orgId: 'org123',
         // 缺少其他必填字段
       }
-      const result = OrgInfoSchema.safeParse(orgInfo)
+      const result = orgInfoSchema.safeParse(orgInfo)
       expect(result.success).toBe(false)
     })
 
@@ -57,7 +57,7 @@ describe('get-org-info.ts', () => {
         pinyin: 'ceshi',
         py: 'cs',
       }
-      const result = OrgInfoSchema.safeParse(orgInfo)
+      const result = orgInfoSchema.safeParse(orgInfo)
       expect(result.success).toBe(false)
     })
   })

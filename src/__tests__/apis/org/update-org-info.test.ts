@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { type UpdateOrgInfo, updateOrgInfo, UpdateOrgInfoSchema } from '../../../apis/org/update-org-info'
+import { type UpdateOrgInfo, updateOrgInfo, updateOrgInfoSchema } from '../../../apis/org/update-org-info'
 import { tbServer } from '../../../apis/request'
 
 // Mock tbServer
@@ -27,7 +27,7 @@ describe('update-org-info.ts', () => {
         pinyin: 'xinzuzhi',
         py: 'xzz',
       }
-      const result = UpdateOrgInfoSchema.safeParse(updateData)
+      const result = updateOrgInfoSchema.safeParse(updateData)
       expect(result.success).toBe(true)
     })
 
@@ -37,7 +37,7 @@ describe('update-org-info.ts', () => {
         orgId: 'org123',
         description: '只更新描述',
       }
-      const result = UpdateOrgInfoSchema.safeParse(updateData)
+      const result = updateOrgInfoSchema.safeParse(updateData)
       expect(result.success).toBe(true)
     })
 
@@ -45,7 +45,7 @@ describe('update-org-info.ts', () => {
       const updateData = {
         description: '缺少必填字段',
       }
-      const result = UpdateOrgInfoSchema.safeParse(updateData)
+      const result = updateOrgInfoSchema.safeParse(updateData)
       expect(result.success).toBe(false)
     })
 
@@ -54,7 +54,7 @@ describe('update-org-info.ts', () => {
         operatorId: 'operator123',
         orgId: 'org123',
       }
-      const result = UpdateOrgInfoSchema.safeParse(updateData)
+      const result = updateOrgInfoSchema.safeParse(updateData)
       expect(result.success).toBe(true)
     })
 
@@ -64,7 +64,7 @@ describe('update-org-info.ts', () => {
         orgId: 'org123',
         isPublic: 'not-boolean', // 错误的类型
       }
-      const result = UpdateOrgInfoSchema.safeParse(updateData)
+      const result = updateOrgInfoSchema.safeParse(updateData)
       expect(result.success).toBe(false)
     })
   })

@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { tbServer } from '../../../apis/request'
-import { getUserInfo, type GetUserInfo, GetUserInfoSchema, UserInfoSchema } from '../../../apis/user/get-user-info'
+import { getUserInfo, type GetUserInfo, getUserInfoSchema, userInfoSchema } from '../../../apis/user/get-user-info'
 
 // Mock tbServer
 vi.mock('../../../apis/request', () => ({
@@ -19,19 +19,19 @@ describe('get-user-info.ts', () => {
   describe('schema 验证', () => {
     it('getUserInfoSchema 应该验证通过 userId 方式的数据', () => {
       const data = { orgId: 'org123', userId: 'user123' }
-      const result = GetUserInfoSchema.safeParse(data)
+      const result = getUserInfoSchema.safeParse(data)
       expect(result.success).toBe(true)
     })
 
     it('getUserInfoSchema 应该验证通过邮箱方式的数据', () => {
       const data = { orgId: 'org123', email: 'test@example.com' }
-      const result = GetUserInfoSchema.safeParse(data)
+      const result = getUserInfoSchema.safeParse(data)
       expect(result.success).toBe(true)
     })
 
     it('getUserInfoSchema 应该拒绝无效数据', () => {
       const data = { orgId: 'org123' }
-      const result = GetUserInfoSchema.safeParse(data)
+      const result = getUserInfoSchema.safeParse(data)
       expect(result.success).toBe(false)
     })
 
@@ -41,7 +41,7 @@ describe('get-user-info.ts', () => {
         id: 'user123',
         name: '测试用户',
       }
-      const result = UserInfoSchema.safeParse(userInfo)
+      const result = userInfoSchema.safeParse(userInfo)
       expect(result.success).toBe(true)
     })
   })

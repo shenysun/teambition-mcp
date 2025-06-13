@@ -3,12 +3,12 @@ import { z } from 'zod'
 import { getOrgId } from '../../constants/env'
 import { tbServer } from '../request'
 
-export const CheckAppExistsSchema = z.object({
+export const checkAppExistsSchema = z.object({
   userIds: z.array(z.string()).describe('用户 ID 数组'),
   orgId: z.string().optional().describe('组织ID'),
 })
 
-export type CheckAppExists = z.infer<typeof CheckAppExistsSchema>
+export type CheckAppExists = z.infer<typeof checkAppExistsSchema>
 export type AppExistsResult = Record<string, boolean>
 export type AppExistsResponse = TBResponse<AppExistsResult>
 

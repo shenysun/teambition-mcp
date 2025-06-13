@@ -3,8 +3,8 @@ import { tbServer } from '../../../apis/request'
 import {
   getUserIdByEmail,
   type GetUserIdByEmail,
-  GetUserIdByEmailSchema,
-  UserIdSchema,
+  getUserIdByEmailSchema,
+  userIdSchema,
 } from '../../../apis/user/get-uid'
 
 // Mock tbServer
@@ -24,25 +24,25 @@ describe('get-uid.ts', () => {
   describe('schema 验证', () => {
     it('getUserIdByEmailSchema 应该验证有效的邮箱数据', () => {
       const data = { email: 'test@example.com', orgId: 'org123' }
-      const result = GetUserIdByEmailSchema.safeParse(data)
+      const result = getUserIdByEmailSchema.safeParse(data)
       expect(result.success).toBe(true)
     })
 
     it('getUserIdByEmailSchema 应该拒绝缺少必填字段的数据', () => {
       const data = { email: 'test@example.com' }
-      const result = GetUserIdByEmailSchema.safeParse(data)
+      const result = getUserIdByEmailSchema.safeParse(data)
       expect(result.success).toBe(false)
     })
 
     it('getUserIdByEmailSchema 应该接受任何字符串作为邮箱', () => {
       const data = { email: 'invalid-email', orgId: 'org123' }
-      const result = GetUserIdByEmailSchema.safeParse(data)
+      const result = getUserIdByEmailSchema.safeParse(data)
       expect(result.success).toBe(true)
     })
 
     it('userIdSchema 应该验证用户ID结构', () => {
       const userId = { id: 'user123' }
-      const result = UserIdSchema.safeParse(userId)
+      const result = userIdSchema.safeParse(userId)
       expect(result.success).toBe(true)
     })
   })

@@ -94,6 +94,7 @@ function handleUserResponse(response: Data): TBResponse<typeof UserSchema> {
 - 使用 PascalCase 命名类型和接口: `UserInfo`, `OrgData`
 - 使用 camelCase 命名类型别名: `userId`, `orgConfig`
 - 对于泛型类型，使用描述性名称: `TBResponse<T>` 而非 `Response<T>`
+- **Zod Schema 命名使用 camelCase (小驼峰)**: `userSchema`, `taskParamsSchema`
 
 ### 类型导出
 
@@ -108,6 +109,7 @@ function handleUserResponse(response: Data): TBResponse<typeof UserSchema> {
 - 为API响应创建明确的验证模式
 - 使用 `.describe()` 为字段添加文档
 - 使用 `z.infer<>` 从验证模式中提取TypeScript类型
+- **Schema 变量名应使用小驼峰命名法，如 `userSchema`, `taskParamsSchema`**
 
 ### 最佳实践
 
